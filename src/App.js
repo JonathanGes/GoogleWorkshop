@@ -12,7 +12,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        {eventStore.events.map(event => <Event event={event} />)}
+        {eventStore.events.map(event => <Event key={event.id} event={event} />)}
       </div>
     );
   }

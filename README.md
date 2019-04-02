@@ -1,5 +1,8 @@
-## Google Workshop - Event Organizer
+# Google Workshop - Event Organizer
 
-### Install
-# yarn install
-# yarn start
+## Intro
+This is our google workshop project.
+
+## Installation
+```yarn install```
+```yarn start```
