@@ -4,5 +4,4 @@
 This is our google workshop project.
 
 ## Installation
-```yarn install```
-```yarn start```
+```yarn install \n yarn start```
