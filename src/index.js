@@ -13,12 +13,13 @@ import EventStore from "./models/EventStore";
 // create store
 const eventStore = EventStore.create();
 eventStore.addEvent({title: 'Wow'});
+eventStore.addEvent({title: 'This is urgent', isUrgent: true});
 
 // Provider allows to pass the store to component
 const Root = (
   <Provider eventStore={eventStore}>
-    <App />
-  </Provider>
+			<App />
+	</Provider>
 );
 
 // Patch listener will be invoked whenever the model or any of its descendants is mutated
