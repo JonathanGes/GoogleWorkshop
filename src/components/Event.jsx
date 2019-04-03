@@ -12,7 +12,7 @@ const baseStyle = css`
 `;
 
 const urgentStyle = css`
-	background-color: red !important;
+	background-color: red;
 `
 
 const Event = ({ event }) => (
