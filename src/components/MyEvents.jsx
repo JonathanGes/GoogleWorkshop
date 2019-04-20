@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import Event from './Event';
+import EventCard from './EventCard';
 import Grid from '@material-ui/core/Grid';
+import { Link } from '@reach/router';
 
 
 const styles = {
@@ -19,8 +20,10 @@ class MyEvents extends Component {
       <div className="my-events" >
         <Grid container spacing={16} justify="center">
           {eventStore.events.map(event => (
-            <Grid item justify="flex-start">
-              <Event key={event.id} event={event} />
+            <Grid item key={event.id}>
+              <Link to={`/event/${event.id}`} style={{textDecoration: 'none'}}>
+                <EventCard event={event} />
+              </Link>
             </Grid>
           ))}
         </Grid>

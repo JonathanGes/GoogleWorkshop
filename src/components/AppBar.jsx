@@ -5,8 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { Link } from '@reach/router';
 
-const styles = {
+const styles = theme => ({
   root: {
 		flexGrow: 1,
 		width: '100%',
@@ -14,21 +15,29 @@ const styles = {
 	},
 	toRight: {
 		'margin-left': 'auto'
+	},
+	button: {
+		color: 'white',
+		textDecoration: 'none'
 	}
-};
+});
 
 function SimpleAppBar(props) {
   const { classes, location } = props;
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
+      <AppBar color="primary">
         <Toolbar>
           <Typography variant="h6" color="inherit">
             My Events
           </Typography>
-					<Button color="inherit" className={classes.toRight}>My Events</Button>
-					<Button color="inherit">Login</Button>
+					<Link to="/my-events" className={`${classes.toRight} ${classes.button}`}>
+						<Button color="inherit" >My Events</Button>
+					</Link>
+					<Link to="/sign-in" className={classes.button}>
+						<Button color="inherit">Login</Button>
+					</Link>
         </Toolbar>
       </AppBar>
     </div>

@@ -2,7 +2,7 @@ import { types } from 'mobx-state-tree';
 
 const Event = types.model('Event', {
   title: types.string,
-  id: types.optional(types.string, ''),
+  id: types.identifier,
   description: types.string,
   image: types.string
   // owner: types.user,
@@ -10,9 +10,6 @@ const Event = types.model('Event', {
   // isActive: types.boolean
 })
 .actions(self => ({
-  generateIdForSelf() {
-    self.id = Math.random().toString(36).substring(7);
-  },
   setTitle(title) {
     self.title = title
   },
@@ -28,12 +25,12 @@ const Event = types.model('Event', {
 }));
 
 const EventStore = types.model('EventStore', {
-  events: types.array(Event)
+  events: types.array(Event),
+  selectedEvent: types.maybeNull(types.reference(Event))
 })
 .actions(self => ({
   addEvent(eventData) {
     const event = Event.create(eventData);
-    event.generateIdForSelf();
     self.events.push(event);
   },
   removeEvent(event) {
@@ -41,6 +38,10 @@ const EventStore = types.model('EventStore', {
   },
   clearEvents() {
     self.events = [];
+  },
+  setSelectedEvent(eventId) {
+    self.selectedEvent = eventId;
+    console.log(self.selectedEvent);
   }
 }));
 
