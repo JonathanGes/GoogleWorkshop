@@ -3,7 +3,8 @@ import { types } from 'mobx-state-tree';
 const Event = types.model('Event', {
   title: types.string,
   id: types.optional(types.string, ''),
-  isUrgent: types.optional(types.boolean, false)
+  description: types.string,
+  image: types.string
   // owner: types.user,
   // date: types.Date,
   // isActive: types.boolean

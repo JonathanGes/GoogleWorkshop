@@ -72,7 +72,7 @@ function SignIn(props) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Link to="/events">
+          <Link to="/my-events">
             <Button
               type="submit"
               fullWidth
