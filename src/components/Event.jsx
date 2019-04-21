@@ -33,7 +33,13 @@ class Event extends Component {
       championsLeague: false
     };
 
-    eventStore.setSelectedEvent(eventId);
+    if (eventStore.events.map(event => event.id).includes(eventId)) {
+      eventStore.setSelectedEvent(eventId);
+    } else {
+      eventStore.addEvent({id: eventId, title: 'Enter your title', description: 'Enter your description', image: 'http://teenairsoftcommunity.com/wp-content/uploads/2016/09/Event-pic.jpg'});
+      eventStore.setSelectedEvent(eventId);
+    }
+    
   }
 
   @action

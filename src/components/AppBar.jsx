@@ -51,7 +51,10 @@ class SimpleAppBar extends Component {
 								<Typography variant="h6" color="inherit">
 									{this.getTitle(location.pathname, selectedEvent && selectedEvent.title)}
 								</Typography>
-								<Link to="/my-events" className={`${classes.toRight} ${classes.button}`}>
+								<Link to="/event/11" className={`${classes.toRight} ${classes.button}`}>
+									<Button color="inherit" >Create</Button>
+								</Link>
+								<Link to="/my-events" className={`${classes.button}`}>
 									<Button color="inherit" >My Events</Button>
 								</Link>
 								<Link to="/sign-in" className={classes.button}>
