@@ -57,6 +57,7 @@
     "react-dom": "^16.8.6",
     "react-jss": "^8.6.1",
     "resolve": "1.10.0",
+    "riek": "^1.1.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.2",

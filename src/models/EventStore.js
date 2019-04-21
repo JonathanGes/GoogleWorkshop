@@ -21,6 +21,9 @@ const Event = types.model('Event', {
   },
   toggleIsActive() {
     self.isActive = !self.isActive;
+  },
+  setDescription(description) {
+    self.description = description;
   }
 }));
 
