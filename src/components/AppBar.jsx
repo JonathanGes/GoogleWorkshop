@@ -43,7 +43,7 @@ class SimpleAppBar extends Component {
 			<div className={classes.root}>
 				{/* This invisible div is a patch to make mobx state tree notice a change within the location HOC */}
 				<div style={{display: 'none'}}>{selectedEvent && selectedEvent.title}</div>
-				
+
 				<Location>
 					{({ location }) => (
 						<AppBar color="primary">
@@ -55,7 +55,7 @@ class SimpleAppBar extends Component {
 									<Button color="inherit" >My Events</Button>
 								</Link>
 								<Link to="/sign-in" className={classes.button}>
-									<Button color="inherit">Login</Button>
+									<Button color="inherit">Logout</Button>
 								</Link>
 							</Toolbar>
 						</AppBar>
