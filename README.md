@@ -1,7 +1,7 @@
 # Google Workshop - Event Planner
 ## Intro
 The Event Planner is the perfect tool for anyone planning small to medium sized events.  
-It’s just a few easy steps:  
+Plan any event in just a few easy steps:  
 1. Create your event.  
 2. Add assignments for yourself and others  
 3. Invite your friends  
