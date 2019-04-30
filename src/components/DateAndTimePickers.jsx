@@ -7,12 +7,9 @@ const styles = theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
     alignItems: "center"
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: 200
   }
 });

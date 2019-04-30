@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree";
+import { types, destroy } from "mobx-state-tree";
 
 const Task = types
   .model("Task", {
@@ -23,7 +23,8 @@ const Event = types
     image: types.string,
     tasks: types.array(Task),
     date: types.maybeNull(types.string),
-    time: types.maybeNull(types.string)
+    time: types.maybeNull(types.string),
+    location: types.maybeNull(types.string)
   })
   .views(self => ({
     get dateAndTime() {
@@ -40,6 +41,9 @@ const Event = types
     setDate(date) {
       self.date = date;
     },
+    setLocation(location) {
+      self.location = location;
+    },
     toggleIsActive() {
       self.isActive = !self.isActive;
     },
@@ -48,6 +52,9 @@ const Event = types
     },
     addTask({ id, title, isDone = false }) {
       self.tasks.push(Task.create({ id, title, isDone }));
+    },
+    removeTask(task) {
+      destroy(task);
     },
     setDate(date) {
       self.date = date;

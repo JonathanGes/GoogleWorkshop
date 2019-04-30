@@ -14,13 +14,14 @@ import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import { Animate } from "react-simple-animate";
 import DateAndTimePickers from "./DateAndTimePickers";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const styles = theme => ({
   propertyBox: {
     marginBottom: "24px"
   },
   toRight: {
-    marginLeft: "auto"
+    marginLeft: "auto !important"
   },
   button: {
     margin: theme.spacing.unit
@@ -35,19 +36,34 @@ const styles = theme => ({
   },
   tasks: {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     flexDirection: "column"
   },
+  task: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   fab: {
-    margin: theme.spacing.unit
+    // margin: theme.spacing.unit
   },
   extendedIcon: {
     marginRight: theme.spacing.unit
   },
   taskList: {
     alignItems: "flex-start",
-    width: "30%"
+    width: "60%"
+  },
+  addIcon: {
+    marginTop: "8px"
+  },
+  deleteIcon: {
+    transform: "scale(0.75)"
+  },
+  checkboxLabel: {
+    marginLeft: "-16px"
+  },
+  eventDetails: {
+    padding: "0 24px 0 30%"
   }
 });
 
@@ -94,7 +110,7 @@ class Event extends Component {
     const eventId = pathArray[pathArray.length - 1];
 
     return (
-      <div className="event">
+      <div className={classes.event}>
         <div className="action-buttons" className={classes.actionButtons}>
           <FormDialog />
           <Button
@@ -112,88 +128,118 @@ class Event extends Component {
             Publish
           </Button>
         </div>
-        <div className={classes.propertyBox}>
-          <Typography variant="h6" color="primary">
-            Title
-          </Typography>
-          <RIEInput
-            value={eventStore.selectedEvent.title}
-            change={({ title }) => eventStore.selectedEvent.setTitle(title)}
-            propName="title"
-          />
-        </div>
 
-        <div className={classes.propertyBox}>
-          <Typography variant="h6" color="primary">
-            Description
-          </Typography>
-          <RIETextArea
-            value={eventStore.selectedEvent.description}
-            change={({ description }) =>
-              eventStore.selectedEvent.setDescription(description)
-            }
-            propName="description"
-          />
-        </div>
+        <div className={classes.eventDetails}>
+          <div className={classes.propertyBox}>
+            <Typography variant="h6" color="primary">
+              Title
+            </Typography>
+            <RIEInput
+              value={eventStore.selectedEvent.title}
+              change={({ title }) => eventStore.selectedEvent.setTitle(title)}
+              propName="title"
+            />
+          </div>
 
-        <div className={classes.propertyBox}>
-          <Typography variant="h6" color="primary">
-            Date and Time
-          </Typography>
-          <DateAndTimePickers
-            value={eventStore.selectedEvent.dateAndTime}
-            onChange={eventStore.selectedEvent.setDateAndTime}
-          />
-        </div>
+          <div className={classes.propertyBox}>
+            <Typography variant="h6" color="primary">
+              Description
+            </Typography>
+            <RIETextArea
+              value={eventStore.selectedEvent.description}
+              change={({ description }) =>
+                eventStore.selectedEvent.setDescription(description)
+              }
+              propName="description"
+            />
+          </div>
 
-        <div className={classes.propertyBox}>
-          <Typography variant="h6" color="primary">
-            Tasks
-          </Typography>
-          <div className={classes.tasks}>
-            <FormGroup className={classes.taskList}>
-              {eventStore.selectedEvent.tasks.map(task => (
-                <Animate
-                  play
-                  startStyle={{ opacity: 0 }}
-                  endStyle={{ opacity: 1 }}
-                >
-                  <div className="task">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={task.isDone}
-                          onChange={task.toggleIsDone}
-                          value={task.id}
+          <div className={classes.propertyBox}>
+            <Typography variant="h6" color="primary">
+              Location
+            </Typography>
+            <RIETextArea
+              value={eventStore.selectedEvent.location || "Enter location"}
+              change={({ location }) =>
+                eventStore.selectedEvent.setLocation(location)
+              }
+              propName="location"
+            />
+          </div>
+
+          <div className={classes.propertyBox}>
+            <Typography variant="h6" color="primary">
+              Date and Time
+            </Typography>
+            <DateAndTimePickers
+              value={eventStore.selectedEvent.dateAndTime}
+              onChange={eventStore.selectedEvent.setDateAndTime}
+            />
+          </div>
+
+          <div className={classes.propertyBox}>
+            <Typography variant="h6" color="primary">
+              Tasks
+            </Typography>
+            <div className={classes.tasks}>
+              <FormGroup className={classes.taskList}>
+                {eventStore.selectedEvent.tasks.map(task => (
+                  <Animate
+                    play
+                    startStyle={{ opacity: 0, width: "100%" }}
+                    endStyle={{ opacity: 1, width: "100%" }}
+                  >
+                    <div className={classes.task}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={task.isDone}
+                            onChange={task.toggleIsDone}
+                            value={task.id}
+                          />
+                        }
+                      />
+                      <RIEInput
+                        value={task.title}
+                        change={({ title }) => task.setTitle(title)}
+                        propName="title"
+                        className={classes.checkboxLabel}
+                      />
+                      <Fab
+                        aria-label="Delete"
+                        className={`${classes.fab} ${classes.toRight} ${
+                          classes.deleteIcon
+                        }`}
+                        size="small"
+                      >
+                        <DeleteIcon
+                          fontSize="small"
+                          onClick={() =>
+                            eventStore.selectedEvent.removeTask(task)
+                          }
                         />
-                      }
-                    />
-                    <RIEInput
-                      value={task.title}
-                      change={({ title }) => task.setTitle(title)}
-                      propName="title"
-                    />
-                  </div>
-                </Animate>
-              ))}
+                      </Fab>
+                    </div>
+                  </Animate>
+                ))}
 
-              <Fab
-                color="primary"
-                aria-label="Add"
-                className={classes.fab}
-                size="small"
-                className={classes.toRight}
-              >
-                <AddIcon
-                  onClick={() =>
-                    eventStore.selectedEvent.addTask({
-                      id: "2",
-                      title: "New task"
-                    })
-                  }
-                />
-              </Fab>
-            </FormGroup>
+                <Fab
+                  color="primary"
+                  aria-label="Add"
+                  size="small"
+                  className={`${classes.toRight} ${classes.addIcon}`}
+                >
+                  <AddIcon
+                    onClick={() =>
+                      eventStore.selectedEvent.addTask({
+                        id: "2",
+                        title: "New task"
+                      })
+                    }
+                  />
+                </Fab>
+              </FormGroup>
+            </div>
           </div>
         </div>
       </div>
