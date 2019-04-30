@@ -1,24 +1,34 @@
 # Google Workshop - Event Planner
+
 ## Intro
+
 The Event Planner is the perfect tool for anyone planning small to medium sized events.  
-Plan any event in just a few easy steps:  
-1. Create your event.  
-2. Add assignments for yourself and others  
-3. Invite your friends  
-4. Enjoy!  
+Plan any event in just a few easy steps:
+
+1. Create your event.
+2. Add assignments for yourself and others
+3. Invite your friends
+4. Enjoy!
+
+http://google-workshop.netlify.com
 
 ## The Dev Zone
+
 ### Before You Start
-Run in the terminal:  
+
+Run in the terminal:
+
 ```
-yarn install  
+yarn install
 yarn start
 ```
 
-The web app will open in your default browser.  
+The web app will open in your default browser.
 
 ### Implementation
-* **Framework** -  React for its ease of use, vast community and reusable components methodology.
-* **State Management** - We use MobX State Tree to manage state. The opinionated methodology makes it easy for us to work together and makes the code readable.
-* **Routing** - Reach router is one of the easiest solutions we could find.
-* **UI** - We chose to go with Material UI for its simplicity and many available examples.
+
+- **Framework** - React for its ease of use, vast community and reusable components methodology.
+- **State Management** - We use MobX State Tree to manage state. The opinionated methodology makes it easy for us to work together and makes the code readable.
+- **Routing** - Reach router is one of the easiest solutions we could find.
+- **UI** - We chose to go with Material UI for its simplicity and many available examples.
+- **Deployment ** - We use Netlify to continously deploy our project to production.

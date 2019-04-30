@@ -46,7 +46,7 @@ class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogTitle id="form-dialog-title">Invite Friends</DialogTitle>
           <DialogContent>
             <DialogContentText>
               To invite friends, type in their emails, separated by commas:
