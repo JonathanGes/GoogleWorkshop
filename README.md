@@ -31,4 +31,4 @@ The web app will open in your default browser.
 - **State Management** - We use MobX State Tree to manage state. The opinionated methodology makes it easy for us to work together and makes the code readable.
 - **Routing** - Reach router is one of the easiest solutions we could find.
 - **UI** - We chose to go with Material UI for its simplicity and many available examples.
-- **Deployment ** - We use Netlify to continously deploy our project to production.
+- **Deployment** - We use Netlify to continously deploy our project to production.
