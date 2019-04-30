@@ -10,10 +10,16 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormDialog from "./FormDialog";
 import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import Fab from "@material-ui/core/Fab";
+import { Animate } from "react-simple-animate";
 
 const styles = theme => ({
   propertyBox: {
     marginBottom: "24px"
+  },
+  toRight: {
+    marginLeft: "auto"
   },
   button: {
     margin: theme.spacing.unit
@@ -26,10 +32,21 @@ const styles = theme => ({
     justifyContent: "flex-end",
     alignItems: "center"
   },
-  assignments: {
+  tasks: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    flexDirection: "column"
+  },
+  fab: {
+    margin: theme.spacing.unit
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit
+  },
+  taskList: {
+    alignItems: "flex-start",
+    width: "30%"
   }
 });
 
@@ -40,9 +57,7 @@ class Event extends Component {
 
   constructor(props) {
     super(props);
-    const { eventStore, location } = props;
-    const pathArray = location.pathname.split("/");
-    const eventId = pathArray[pathArray.length - 1];
+    const { eventStore, eventId } = props;
 
     this.assignments = {
       callFriends: false,
@@ -62,6 +77,9 @@ class Event extends Component {
       });
       eventStore.setSelectedEvent(eventId);
     }
+
+    // eventStore.selectedEvent.addTask({ title: "Order sushi", id: "1" });
+    console.log(eventStore.selectedEvent.tasks);
   }
 
   @action
@@ -125,42 +143,51 @@ class Event extends Component {
 
         <div className={classes.propertyBox}>
           <Typography variant="h6" color="primary">
-            Assignments
+            Tasks
           </Typography>
-          <div className={classes.assignments}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.assignments.callFriends}
-                    onChange={this.handleChange("callFriends")}
-                    value="callFriends"
-                  />
-                }
-                label="Call friends"
-              />
+          <div className={classes.tasks}>
+            <FormGroup className={classes.taskList}>
+              {eventStore.selectedEvent.tasks.map(task => (
+                <Animate
+                  play
+                  startStyle={{ opacity: 0 }}
+                  endStyle={{ opacity: 1 }}
+                >
+                  <div className="task">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={task.isDone}
+                          onChange={task.toggleIsDone}
+                          value={task.id}
+                        />
+                      }
+                    />
+                    <RIEInput
+                      value={task.title}
+                      change={({ title }) => task.setTitle(title)}
+                      propName="title"
+                    />
+                  </div>
+                </Animate>
+              ))}
 
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.assignments.callCatering}
-                    onChange={this.handleChange("callCatering")}
-                    value="callCatering"
-                  />
-                }
-                label="Call catering"
-              />
-
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.assignments.championsLeague}
-                    onChange={this.handleChange("championsLeague")}
-                    value="championsLeague"
-                  />
-                }
-                label="Make sure event is not on the same day as the Champions League final"
-              />
+              <Fab
+                color="primary"
+                aria-label="Add"
+                className={classes.fab}
+                size="small"
+                className={classes.toRight}
+              >
+                <AddIcon
+                  onClick={() =>
+                    eventStore.selectedEvent.addTask({
+                      id: "2",
+                      title: "New task"
+                    })
+                  }
+                />
+              </Fab>
             </FormGroup>
           </div>
         </div>
