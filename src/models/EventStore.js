@@ -21,11 +21,15 @@ const Event = types
     id: types.identifier,
     description: types.string,
     image: types.string,
-    tasks: types.array(Task)
-    // owner: types.user,
-    // date: types.Date,
-    // isActive: types.boolean
+    tasks: types.array(Task),
+    date: types.maybeNull(types.string),
+    time: types.maybeNull(types.string)
   })
+  .views(self => ({
+    get dateAndTime() {
+      return self.date && self.time ? `${self.date}T${self.time}` : null;
+    }
+  }))
   .actions(self => ({
     setTitle(title) {
       self.title = title;
@@ -44,6 +48,18 @@ const Event = types
     },
     addTask({ id, title, isDone = false }) {
       self.tasks.push(Task.create({ id, title, isDone }));
+    },
+    setDate(date) {
+      self.date = date;
+    },
+    setTime(time) {
+      self.time = time;
+    },
+    setDateAndTime(dateAndTime) {
+      console.log(dateAndTime);
+      const [date, time] = dateAndTime.split("T");
+      self.date = date;
+      self.time = time;
     }
   }));
 

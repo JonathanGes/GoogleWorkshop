@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import { Animate } from "react-simple-animate";
+import DateAndTimePickers from "./DateAndTimePickers";
 
 const styles = theme => ({
   propertyBox: {
@@ -113,13 +114,7 @@ class Event extends Component {
         </div>
         <div className={classes.propertyBox}>
           <Typography variant="h6" color="primary">
-            {`Event ID: ${eventStore.selectedEvent.id}`}
-          </Typography>
-        </div>
-
-        <div className={classes.propertyBox}>
-          <Typography variant="h6" color="primary">
-            Event Title
+            Title
           </Typography>
           <RIEInput
             value={eventStore.selectedEvent.title}
@@ -130,7 +125,7 @@ class Event extends Component {
 
         <div className={classes.propertyBox}>
           <Typography variant="h6" color="primary">
-            Event Description
+            Description
           </Typography>
           <RIETextArea
             value={eventStore.selectedEvent.description}
@@ -138,6 +133,16 @@ class Event extends Component {
               eventStore.selectedEvent.setDescription(description)
             }
             propName="description"
+          />
+        </div>
+
+        <div className={classes.propertyBox}>
+          <Typography variant="h6" color="primary">
+            Date and Time
+          </Typography>
+          <DateAndTimePickers
+            value={eventStore.selectedEvent.dateAndTime}
+            onChange={eventStore.selectedEvent.setDateAndTime}
           />
         </div>
 
