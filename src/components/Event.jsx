@@ -15,6 +15,8 @@ import Fab from "@material-ui/core/Fab";
 import { Animate } from "react-simple-animate";
 import DateAndTimePickers from "./DateAndTimePickers";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Tasks from './Tasks';
+
 
 const styles = theme => ({
   propertyBox: {
@@ -182,7 +184,8 @@ class Event extends Component {
               Tasks
             </Typography>
             <div className={classes.tasks}>
-              <FormGroup className={classes.taskList}>
+              <Tasks tasks={eventStore.selectedEvent.tasks} addTask={eventStore.selectedEvent.addTask} removeTask={eventStore.selectedEvent.removeTask} />
+              {/* <FormGroup className={classes.taskList}>
                 {eventStore.selectedEvent.tasks.map(task => (
                   <Animate
                     play
@@ -238,7 +241,7 @@ class Event extends Component {
                     }
                   />
                 </Fab>
-              </FormGroup>
+              </FormGroup> */}
             </div>
           </div>
         </div>
