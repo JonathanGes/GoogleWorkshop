@@ -65,7 +65,7 @@ const styles = theme => ({
     marginLeft: "-16px"
   },
   eventDetails: {
-    padding: "0 24px 0 30%"
+    // padding: "0 24px 0 30%"
   }
 });
 

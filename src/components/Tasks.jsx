@@ -4,6 +4,12 @@ import { withStyles, withTheme } from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 import { computed, observable, action } from 'mobx';
 
+const taskStatuses = {
+	todo: 'To Do',
+	done: 'Done',
+	pending: 'Pending'
+}
+
 @inject('eventStore')
 @observer
 class Tasks extends Component {
@@ -36,6 +42,7 @@ class Tasks extends Component {
 					title="Tasks"
 					columns={[
 						{ title: 'Title', field: 'title' },
+						{ title: 'Status', field: 'status', lookup: taskStatuses }
 					]}
 					data={tasks.map(task => (task))}
 					editable={{
@@ -43,25 +50,26 @@ class Tasks extends Component {
             new Promise((resolve, reject) => {
               setTimeout(() => {
                 {
-
+									console.log(newData);
+									addTask({id: this.taskId, ...newData});
                 }
                 resolve()
               }, 1000)
             }),
-          onRowUpdate: (newData, oldData) =>
+          onRowUpdate: (newTask, oldTask) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
                 {
-
+									oldTask.updateTask(newTask);
                 }
                 resolve()
               }, 1000)
             }),
-          onRowDelete: oldData =>
+          onRowDelete: oldTask =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
                 {
-
+									removeTask(oldTask);
                 }
                 resolve()
               }, 1000)

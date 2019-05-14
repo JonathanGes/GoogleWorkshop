@@ -4,14 +4,21 @@ const Task = types
   .model("Task", {
     id: types.identifier,
     title: types.string,
-    isDone: types.boolean
+    status: types.optional(types.string, 'todo')
   })
   .actions(self => ({
     setTitle(title) {
       self.title = title;
     },
-    toggleIsDone() {
-      self.isDone = !self.isDone;
+    setStatus(status) {
+      self.status = status;
+    },
+    updateTask(newEventData) {
+      for (let key in newEventData) {
+        const newValue = newEventData[key];
+        if (key === 'title') self.setTitle(newValue);
+        else if (key === 'status') self.setStatus(newValue);
+      }
     }
   }));
 
@@ -50,8 +57,8 @@ const Event = types
     setDescription(description) {
       self.description = description;
     },
-    addTask({ id, title, isDone = false }) {
-      self.tasks.push(Task.create({ id, title, isDone }));
+    addTask({ id, title, status }) {
+      self.tasks.push(Task.create({ id, title, status }));
     },
     removeTask(task) {
       destroy(task);
@@ -67,7 +74,7 @@ const Event = types
       const [date, time] = dateAndTime.split("T");
       self.date = date;
       self.time = time;
-    }
+    },
   }));
 
 const EventStore = types
