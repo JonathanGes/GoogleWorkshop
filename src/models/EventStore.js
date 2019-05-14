@@ -4,7 +4,8 @@ const Task = types
   .model("Task", {
     id: types.identifier,
     title: types.string,
-    status: types.optional(types.string, 'todo')
+    status: types.optional(types.string, 'todo'),
+    assignee: types.optional(types.string, '')
   })
   .actions(self => ({
     setTitle(title) {
@@ -13,11 +14,15 @@ const Task = types
     setStatus(status) {
       self.status = status;
     },
+    setAssignee(assignee) {
+      self.assignee = assignee;
+    },
     updateTask(newEventData) {
       for (let key in newEventData) {
         const newValue = newEventData[key];
         if (key === 'title') self.setTitle(newValue);
         else if (key === 'status') self.setStatus(newValue);
+        else if (key === 'assignee') self.setAssignee(newValue);
       }
     }
   }));

@@ -4,11 +4,20 @@ import { withStyles, withTheme } from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 import { computed, observable, action } from 'mobx';
 
+import InviteesAutosuggest from './InviteesAutosuggest';
+
+
 const taskStatuses = {
 	todo: 'To Do',
 	done: 'Done',
 	pending: 'Pending'
 }
+
+const invitees = [
+	{ name: 'Jonathan', email: 'jonathan@gmail.com' },
+	{ name: 'Yoni', email: 'yoni@gmail.com' },
+	{ name: 'Shir', email: 'shir@gmail.com' }
+];
 
 @inject('eventStore')
 @observer
@@ -20,6 +29,10 @@ class Tasks extends Component {
 		const { tasks, addTask, removeTask } = selectedEvent;
 		const handleAddTask = () => addTask({ id: '2', title: 'Wow' });
 		handleAddTask();
+		this.state = {
+      value: '',
+      suggestions: []
+    };
 	}
 
 	@computed
@@ -35,6 +48,7 @@ class Tasks extends Component {
 		const { eventStore } = this.props;
 		const { selectedEvent } = eventStore;
 		const { tasks, addTask, removeTask } = selectedEvent;
+    const { value, suggestions } = this.state;
 
 		return (
 			<div className="tasks">
@@ -42,7 +56,8 @@ class Tasks extends Component {
 					title="Tasks"
 					columns={[
 						{ title: 'Title', field: 'title' },
-						{ title: 'Status', field: 'status', lookup: taskStatuses }
+						{ title: 'Status', field: 'status', lookup: taskStatuses },
+						{ title: 'Assignee', field: 'assignee', editComponent: props => <InviteesAutosuggest onChange={props.onChange} invitees={invitees} /> }
 					]}
 					data={tasks.map(task => (task))}
 					editable={{
