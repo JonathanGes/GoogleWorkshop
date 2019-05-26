@@ -4,6 +4,12 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+import * as firebase from "firebase/app";
+
+// Add the Firebase products that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+
 import { onPatch } from "mobx-state-tree";
 import makeInspectable from "mobx-devtools-mst";
 import { Provider } from "mobx-react";
@@ -24,6 +30,22 @@ const jss = create({
   // We define a custom insertion point that JSS will look for injecting the styles in the DOM.
   insertionPoint: 'jss-insertion-point',
 });
+
+
+// Your web app&#39;s Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGfKgOAAMkUtgeCJjRAJbL2SDpKQPJsok",
+    authDomain: "events-planner-workshop.firebaseapp.com",
+    databaseURL: "https://events-planner-workshop.firebaseio.com",
+    projectId: "events-planner-workshop",
+    storageBucket: "events-planner-workshop.appspot.com",
+    messagingSenderId: "99458369236",
+    appId: "1:99458369236:web:0eff2c72cdd47d02"
+  };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 
 // create store
 const eventStore = EventStore.create();
