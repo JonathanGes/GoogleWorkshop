@@ -1,4 +1,6 @@
 import { types, destroy } from "mobx-state-tree";
+import arrayMove from 'array-move';
+
 
 const Task = types
   .model("Task", {
@@ -27,6 +29,28 @@ const Task = types
     }
   }));
 
+const PlaylistTrack = types
+  .model("PlaylistTrack", {
+    id: types.identifier,
+    title: types.string,
+    artist: types.optional(types.string, 'Unknown')
+  })
+  .actions(self => ({
+    setTitle(title) {
+      self.title = title;
+    },
+    setArtist(artist) {
+      self.artist = artist;
+    },
+    updateSong(newEventData) {
+      for (let key in newEventData) {
+        const newValue = newEventData[key];
+        if (key === 'title') self.setTitle(newValue);
+        else if (key === 'artist') self.setArtist(newValue);
+      }
+    }
+  }));
+
 const Event = types
   .model("Event", {
     title: types.string,
@@ -36,7 +60,8 @@ const Event = types
     tasks: types.array(Task),
     date: types.maybeNull(types.string),
     time: types.maybeNull(types.string),
-    location: types.maybeNull(types.string)
+    location: types.maybeNull(types.string),
+    playlist: types.array(PlaylistTrack)
   })
   .views(self => ({
     get dateAndTime() {
@@ -80,6 +105,15 @@ const Event = types
       self.date = date;
       self.time = time;
     },
+    addPlaylistTrack({ id, title, artist }) {
+      self.playlist.push(PlaylistTrack.create({ id, title, artist }));
+    },
+    removePlaylistTrack(playlistTrack) {
+      destroy(playlistTrack);
+    },
+    movePlaylistTrack(oldIndex, newIndex) {
+      self.playlist = arrayMove(self.playlist, oldIndex, newIndex);
+    }
   }));
 
 const EventStore = types

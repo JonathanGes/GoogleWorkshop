@@ -27,8 +27,7 @@ class Tasks extends Component {
 		const { eventStore } = this.props;
 		const { selectedEvent } = eventStore;
 		const { tasks, addTask, removeTask } = selectedEvent;
-		const handleAddTask = () => addTask({ id: '2', title: 'Wow' });
-		handleAddTask();
+
 		this.state = {
       value: '',
       suggestions: []
@@ -41,7 +40,7 @@ class Tasks extends Component {
 		const { selectedEvent } = eventStore;
 		const { tasks, addTask, removeTask } = selectedEvent;
 
-		return (parseInt(tasks[tasks.length - 1].id) + 1).toString();
+		return tasks.length ? (parseInt(tasks[tasks.length - 1].id) + 1).toString() : '1';
 	}
 
 	render() {
