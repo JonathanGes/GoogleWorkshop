@@ -16,6 +16,7 @@ import { Animate } from "react-simple-animate";
 import DateAndTimePickers from "./DateAndTimePickers";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Tasks from './Tasks';
+import Playlist from './Playlist';
 
 
 const styles = theme => ({
@@ -99,6 +100,10 @@ class Event extends Component {
 
     // eventStore.selectedEvent.addTask({ title: "Order sushi", id: "1" });
     console.log(eventStore.selectedEvent.tasks);
+    eventStore.selectedEvent.addPlaylistTrack({id: '1', title: 'wow', artist: 'oh'});
+    eventStore.selectedEvent.addPlaylistTrack({id: '2', title: 'omg', artist: 'eminem'});
+    eventStore.selectedEvent.addPlaylistTrack({id: '3', title: 'super', artist: 'drake'});
+    eventStore.selectedEvent.addPlaylistTrack({id: '4', title: 'last nite', artist: 'strokes'});
   }
 
   @action
@@ -185,63 +190,15 @@ class Event extends Component {
             </Typography>
             <div className={classes.tasks}>
               <Tasks tasks={eventStore.selectedEvent.tasks} addTask={eventStore.selectedEvent.addTask} removeTask={eventStore.selectedEvent.removeTask} />
-              {/* <FormGroup className={classes.taskList}>
-                {eventStore.selectedEvent.tasks.map(task => (
-                  <Animate
-                    play
-                    startStyle={{ opacity: 0, width: "100%" }}
-                    endStyle={{ opacity: 1, width: "100%" }}
-                  >
-                    <div className={classes.task}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={task.isDone}
-                            onChange={task.toggleIsDone}
-                            value={task.id}
-                          />
-                        }
-                      />
-                      <RIEInput
-                        value={task.title}
-                        change={({ title }) => task.setTitle(title)}
-                        propName="title"
-                        className={classes.checkboxLabel}
-                      />
-                      <Fab
-                        aria-label="Delete"
-                        className={`${classes.fab} ${classes.toRight} ${
-                          classes.deleteIcon
-                        }`}
-                        size="small"
-                      >
-                        <DeleteIcon
-                          fontSize="small"
-                          onClick={() =>
-                            eventStore.selectedEvent.removeTask(task)
-                          }
-                        />
-                      </Fab>
-                    </div>
-                  </Animate>
-                ))}
+            </div>
+          </div>
 
-                <Fab
-                  color="primary"
-                  aria-label="Add"
-                  size="small"
-                  className={`${classes.toRight} ${classes.addIcon}`}
-                >
-                  <AddIcon
-                    onClick={() =>
-                      eventStore.selectedEvent.addTask({
-                        id: "2",
-                        title: "New task"
-                      })
-                    }
-                  />
-                </Fab>
-              </FormGroup> */}
+          <div className={classes.propertyBox}>
+            <Typography variant="h6" color="primary">
+              Playlist
+            </Typography>
+            <div className={classes.tasks}>
+              <Playlist playlist={eventStore.selectedEvent.playlist} />
             </div>
           </div>
         </div>
