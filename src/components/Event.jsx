@@ -20,6 +20,7 @@ import Playlist from "./Playlist";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const styles = theme => ({
   propertyBox: {
@@ -28,9 +29,9 @@ const styles = theme => ({
   toRight: {
     marginLeft: "auto !important"
   },
-  button: {
-    marginRight: "8px"
-  },
+  // button: {
+  //   marginRight: "8px"
+  // },
   input: {
     display: "none"
   },
@@ -107,26 +108,28 @@ class Event extends Component {
 
     // eventStore.selectedEvent.addTask({ title: "Order sushi", id: "1" });
     console.log(eventStore.selectedEvent.tasks);
-    eventStore.selectedEvent.addPlaylistTrack({
-      id: "1",
-      title: "SAD!",
-      artist: "XXXTENTACION"
-    });
-    eventStore.selectedEvent.addPlaylistTrack({
-      id: "2",
-      title: "Hunnybee",
-      artist: "Unknown Mortal Orchestra"
-    });
-    eventStore.selectedEvent.addPlaylistTrack({
-      id: "3",
-      title: "Still Beating",
-      artist: "Mac Demarco"
-    });
-    eventStore.selectedEvent.addPlaylistTrack({
-      id: "4",
-      title: "Your DOg",
-      artist: "Soccer Mommy"
-    });
+    if (!eventStore.selectedEvent.playlist.length) {
+      eventStore.selectedEvent.addPlaylistTrack({
+        id: "1",
+        title: "SAD!",
+        artist: "XXXTENTACION"
+      });
+      eventStore.selectedEvent.addPlaylistTrack({
+        id: "2",
+        title: "Hunnybee",
+        artist: "Unknown Mortal Orchestra"
+      });
+      eventStore.selectedEvent.addPlaylistTrack({
+        id: "3",
+        title: "Still Beating",
+        artist: "Mac Demarco"
+      });
+      eventStore.selectedEvent.addPlaylistTrack({
+        id: "4",
+        title: "Your DOg",
+        artist: "Soccer Mommy"
+      });
+    }
   }
 
   @action
@@ -141,10 +144,10 @@ class Event extends Component {
 
     return (
       <div className={classes.event}>
-        <Grid container spacing={3}>
-          <Grid container>
-            <div className="action-buttons" className={classes.actionButtons}>
-              <Grid item>
+        <Grid container spacing={8}>
+          <Grid container spacing={8}>
+            <Grid item>
+              <Tooltip title="Go ahead and make your event public!">
                 <Button
                   variant="contained"
                   className={classes.button}
@@ -152,8 +155,10 @@ class Event extends Component {
                 >
                   Publish
                 </Button>
-              </Grid>
-              <Grid item>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <Tooltip title="Save your changes. This won't make your event visible to everyone.">
                 <Button
                   variant="contained"
                   className={classes.button}
@@ -161,11 +166,11 @@ class Event extends Component {
                 >
                   Save
                 </Button>
-              </Grid>
-              <Grid item>
-                <FormDialog />
-              </Grid>
-            </div>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <FormDialog />
+            </Grid>
           </Grid>
 
           <Grid item xs={12}>
@@ -173,7 +178,7 @@ class Event extends Component {
           </Grid>
 
           <div className={classes.eventDetails}>
-            <Grid container>
+            <Grid container spacing={24}>
               <Grid item xs={3}>
                 <div className={classes.propertyBox}>
                   <Typography variant="h6" color="primary">
