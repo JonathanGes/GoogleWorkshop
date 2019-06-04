@@ -1,13 +1,12 @@
 import { types, destroy } from "mobx-state-tree";
-import arrayMove from 'array-move';
-
+import arrayMove from "array-move";
 
 const Task = types
   .model("Task", {
     id: types.identifier,
     title: types.string,
-    status: types.optional(types.string, 'todo'),
-    assignee: types.optional(types.string, '')
+    status: types.optional(types.string, "todo"),
+    assignee: types.optional(types.string, "")
   })
   .actions(self => ({
     setTitle(title) {
@@ -22,9 +21,9 @@ const Task = types
     updateTask(newEventData) {
       for (let key in newEventData) {
         const newValue = newEventData[key];
-        if (key === 'title') self.setTitle(newValue);
-        else if (key === 'status') self.setStatus(newValue);
-        else if (key === 'assignee') self.setAssignee(newValue);
+        if (key === "title") self.setTitle(newValue);
+        else if (key === "status") self.setStatus(newValue);
+        else if (key === "assignee") self.setAssignee(newValue);
       }
     }
   }));
@@ -33,7 +32,7 @@ const PlaylistTrack = types
   .model("PlaylistTrack", {
     id: types.identifier,
     title: types.string,
-    artist: types.optional(types.string, 'Unknown')
+    artist: types.optional(types.string, "Unknown")
   })
   .actions(self => ({
     setTitle(title) {
@@ -45,8 +44,8 @@ const PlaylistTrack = types
     updateSong(newEventData) {
       for (let key in newEventData) {
         const newValue = newEventData[key];
-        if (key === 'title') self.setTitle(newValue);
-        else if (key === 'artist') self.setArtist(newValue);
+        if (key === "title") self.setTitle(newValue);
+        else if (key === "artist") self.setArtist(newValue);
       }
     }
   }));
@@ -55,6 +54,7 @@ const Event = types
   .model("Event", {
     title: types.string,
     id: types.identifier,
+    isActive: types.optional(types.boolean, false),
     description: types.string,
     image: types.string,
     tasks: types.array(Task),
@@ -87,8 +87,8 @@ const Event = types
     setDescription(description) {
       self.description = description;
     },
-    addTask({ id, title, status }) {
-      self.tasks.push(Task.create({ id, title, status }));
+    addTask({ id, title, status, assignee }) {
+      self.tasks.push(Task.create({ id, title, status, assignee }));
     },
     removeTask(task) {
       destroy(task);

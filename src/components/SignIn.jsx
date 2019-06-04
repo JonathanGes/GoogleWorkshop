@@ -48,7 +48,7 @@ const styles = theme => ({
 });
 
 function SignIn(props) {
-  const { classes } = props;
+  const { classes, activeEventId } = props;
 
   return (
     <main className={classes.main}>
@@ -78,7 +78,7 @@ function SignIn(props) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Link to="/event/1">
+          <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
             <Button
               type="submit"
               fullWidth

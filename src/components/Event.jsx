@@ -21,6 +21,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
+import Switch from "@material-ui/core/Switch";
 
 const styles = theme => ({
   propertyBox: {
@@ -170,6 +171,26 @@ class Event extends Component {
             </Grid>
             <Grid item>
               <FormDialog />
+            </Grid>
+            <Grid item style={{ marginLeft: "auto" }}>
+              <Tooltip
+                title={
+                  eventStore.selectedEvent.isActive
+                    ? "Put it in the books!"
+                    : "Here we go again!"
+                }
+              >
+                <Button
+                  variant={
+                    eventStore.selectedEvent.isActive ? "contained" : "outlined"
+                  }
+                  className={classes.button}
+                  color="primary"
+                  onClick={eventStore.selectedEvent.toggleIsActive}
+                >
+                  {eventStore.selectedEvent.isActive ? "Archive" : "Unarchive"}
+                </Button>
+              </Tooltip>
             </Grid>
           </Grid>
 
