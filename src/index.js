@@ -13,9 +13,6 @@ import { create } from "jss";
 import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import green from "@material-ui/core/colors/green";
-import pink from "@material-ui/core/colors/pink";
-
 import EventStore from "./models/EventStore";
 
 const generateClassName = createGenerateClassName();
@@ -98,8 +95,20 @@ const theme = createMuiTheme({
     background: {
       default: "#fff"
     },
-    primary: pink,
-    secondary: green
+    primary: {
+      main: "#f6416c"
+    },
+    secondary: {
+      main: "#00b8a9",
+      contrastText: "#fff"
+    },
+    overrides: {
+      MuiButton: {
+        primary: {
+          color: "white"
+        }
+      }
+    }
   }
 });
 

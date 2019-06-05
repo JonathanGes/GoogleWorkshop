@@ -35,7 +35,7 @@ class FormDialog extends React.Component {
     return (
       <div>
         <Button
-          variant="outlined"
+          variant="contained"
           color="primary"
           onClick={this.handleClickOpen}
         >
