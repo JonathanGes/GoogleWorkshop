@@ -5,6 +5,7 @@ import { observer, inject } from "mobx-react";
 import { computed, observable, action } from "mobx";
 
 import InviteesAutosuggest from "./InviteesAutosuggest";
+import Typography from "@material-ui/core/Typography";
 
 const taskStatuses = {
   todo: "To Do",
@@ -44,6 +45,33 @@ class Tasks extends Component {
       : "1";
   }
 
+  @computed
+  get numTasksTodo() {
+    const { eventStore } = this.props;
+    const { selectedEvent } = eventStore;
+    const { tasks, addTask, removeTask } = selectedEvent;
+
+    return tasks.filter(task => task.status === "todo").length;
+  }
+
+  @computed
+  get numTasksDone() {
+    const { eventStore } = this.props;
+    const { selectedEvent } = eventStore;
+    const { tasks, addTask, removeTask } = selectedEvent;
+
+    return tasks.filter(task => task.status === "done").length;
+  }
+
+  @computed
+  get numTasksPending() {
+    const { eventStore } = this.props;
+    const { selectedEvent } = eventStore;
+    const { tasks, addTask, removeTask } = selectedEvent;
+
+    return tasks.filter(task => task.status === "pending").length;
+  }
+
   render() {
     const { eventStore } = this.props;
     const { selectedEvent } = eventStore;
@@ -52,6 +80,9 @@ class Tasks extends Component {
 
     return (
       <div className="tasks">
+        <Typography variant="h6">{`To Do: ${this.numTasksTodo} Pending: ${
+          this.numTasksPending
+        } Done: ${this.numTasksDone}`}</Typography>
         <MaterialTable
           title="Tasks"
           className="amazing"
