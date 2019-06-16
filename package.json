@@ -61,6 +61,7 @@
     "react-dom": "^16.8.6",
     "react-jss": "^8.6.1",
     "react-simple-animate": "^2.6.9",
+    "react-with-firebase-auth": "^1.0.3",
     "resolve": "1.10.0",
     "riek": "^1.1.0",
     "sass-loader": "7.1.0",

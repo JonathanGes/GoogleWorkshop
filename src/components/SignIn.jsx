@@ -13,6 +13,18 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from "@reach/router"
+/* firbase */
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './../firebaseConfig';
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+const firebaseAppAuth = firebaseApp.auth();
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
 
 const styles = theme => ({
   main: {
@@ -49,6 +61,12 @@ const styles = theme => ({
 function SignIn(props) {
   const { classes } = props;
 
+  const {
+    user,
+    signOut,
+    signInWithGoogle,
+  } = props;
+
   return (
     <main className={classes.main}>
       <CssBaseline />
@@ -82,6 +100,16 @@ function SignIn(props) {
             >
               Sign in
             </Button>
+            {
+              user 
+              ? <p>Hello, {user.displayName}</p>
+              : <p>Please sign in.</p>
+            }
+            {
+              user
+              ? <button onClick={signOut}>Sign out</button>
+              : <button onClick={()=>signInWithGoogle({email: "yoni.strsss@gmail.com"})}>Sign in with Google</button>
+            }
           </Link>
         </form>
       </Paper>
@@ -93,4 +121,9 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+// export default withStyles(styles)(SignIn);
+
+export default withStyles(styles)(withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(SignIn))
