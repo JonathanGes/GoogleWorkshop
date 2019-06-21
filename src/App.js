@@ -10,8 +10,19 @@ import Event from "./components/Event";
 import AppBar from "./components/AppBar";
 import { jsx } from "@emotion/core";
 import "./App.css";
+/* firebase */
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
 
 const showAppBar = pathname => !["/", "/sign-in"].includes(pathname);
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseAppAuth = firebaseApp.auth();
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
 
 @inject("eventStore")
 @observer
@@ -25,6 +36,12 @@ class App extends Component {
   }
 
   render() {
+    const {
+      user,
+      signOut,
+      signInWithGoogle,
+    } = this.props;
+
     return (
       <div className="App">
         <Location>
@@ -40,9 +57,12 @@ class App extends Component {
                     path="/sign-in"
                     default
                     activeEventId={this.activeEventId}
+                    user = {user}
+                    signInWithGoogle = {signInWithGoogle}
+
                   />
-                  <MyEvents path="/my-events" />
-                  <Event path="event/:eventId" />
+                  {user && <MyEvents path="/my-events" />}
+                  {user && <Event path="event/:eventId" />}
                 </Router>
               </div>
             </CssBaseline>
@@ -53,4 +73,7 @@ class App extends Component {
   }
 }
 
-export default withTheme()(App);
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(withTheme()(App));
