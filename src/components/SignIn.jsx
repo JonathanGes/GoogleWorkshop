@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "@reach/router";
+import GoogleButton from 'react-google-button';
 
 const styles = theme => ({
   main: {
@@ -58,14 +59,14 @@ function SignIn(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {props.user ? `Welcome Back, ${props.user.displayName}` : "Sign in"}
         </Typography>
         <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
+          <FormControl disabled={props.user} margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
             <Input id="email" name="email" autoComplete="email" autoFocus />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
+          <FormControl disabled={props.user} margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
               name="password"
@@ -78,6 +79,19 @@ function SignIn(props) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+          {props.user 
+          ?
+          <Button
+              
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={props.signOut}
+        >
+          Sign Out
+        </Button>
+        :
           <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
             <Button
               type="submit"
@@ -85,9 +99,14 @@ function SignIn(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={props.signInWithGoogle}
             >
               Sign in
             </Button>
+          </Link>
+          }
+          <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
+            <GoogleButton disabled={props.user} className={classes.submit} type="light" onClick={props.signInWithGoogle}/>
           </Link>
         </form>
       </Paper>

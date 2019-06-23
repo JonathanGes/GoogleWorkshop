@@ -14,6 +14,8 @@ import "./App.css";
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
+
 import firebaseConfig from './firebaseConfig';
 
 const showAppBar = pathname => !["/", "/sign-in"].includes(pathname);
@@ -24,9 +26,12 @@ const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider(),
 };
 
+// const database = firebaseApp.database();
+// database.ref('home/').push({message: "hello world"});
 @inject("eventStore")
 @observer
 class App extends Component {
+
   @computed
   get activeEventId() {
     const activeEvents = this.props.eventStore.events.filter(
@@ -47,7 +52,7 @@ class App extends Component {
         <Location>
           {({ location }) => (
             <CssBaseline>
-              {showAppBar(location.pathname) && <AppBar />}
+              {(showAppBar(location.pathname) && user) && <AppBar user={user} signOut={signOut} />}
               <div
                 className="content"
                 css={{ padding: "48px 24px", width: "100%" }}
@@ -59,7 +64,7 @@ class App extends Component {
                     activeEventId={this.activeEventId}
                     user = {user}
                     signInWithGoogle = {signInWithGoogle}
-
+                    signOut={signOut}
                   />
                   {user && <MyEvents path="/my-events" />}
                   {user && <Event path="event/:eventId" />}

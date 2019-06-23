@@ -35,7 +35,7 @@ class SimpleAppBar extends Component {
   getTitle(pathname, eventTitle) {
     return pathname.includes("/event/")
       ? eventTitle
-      : titleByPathname[pathname];
+      : `Events of ${this.props.user.displayName}`;
   }
 
   render() {
@@ -79,7 +79,7 @@ class SimpleAppBar extends Component {
                 </Link>
 
                 <Link to="/sign-in" className={classes.button}>
-                  <Button color="inherit">Logout</Button>
+                  <Button color="inherit" onClick = {this.props.signOut}>Logout</Button>
                 </Link>
               </Toolbar>
             </AppBar>

@@ -7984,6 +7984,13 @@ react-event-listener@^0.6.2, react-event-listener@^0.6.6:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-google-button@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/react-google-button/-/react-google-button-0.5.3.tgz#d8c76328e51b55f2835a4ebe23817906dac6a4f8"
+  integrity sha512-2xiECMLZ2qUbMtYq7fjwi/8WEVpLI5UuZLPGJzVkpcGOq/hdY5tqx8AXWUqI7QOgb9mG48/UG67kOzTgab+NUw==
+  dependencies:
+    prop-types "^15.5.8"
+
 react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
