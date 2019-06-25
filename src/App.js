@@ -43,7 +43,7 @@ class App extends Component {
     const { user, signOut, signInWithGoogle } = this.props;
 
     return (
-      <div className="App">
+      <div className="App" style={{ backgroundColor: "rgb(249, 249, 249)" }}>
         <Location>
           {({ location }) => (
             <CssBaseline>
@@ -52,7 +52,10 @@ class App extends Component {
               )}
               <div
                 className="content"
-                css={{ padding: "48px 24px", width: "60%" }}
+                css={{
+                  padding: "48px 24px",
+                  width: "60%"
+                }}
               >
                 <Router primary={false}>
                   <SignIn

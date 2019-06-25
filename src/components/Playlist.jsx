@@ -146,7 +146,7 @@ class Playlist extends Component {
           ))}
         </SortableContainer>
         <Fab
-          color="primary"
+          color="secondary"
           aria-label="Add"
           size="small"
           className={classes.fab}

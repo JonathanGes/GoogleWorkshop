@@ -13,7 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "@reach/router";
-import GoogleButton from 'react-google-button';
+import GoogleButton from "react-google-button";
 
 const styles = theme => ({
   main: {
@@ -79,34 +79,37 @@ function SignIn(props) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          {props.user 
-          ?
-          <Button
-              
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={props.signOut}
-        >
-          Sign Out
-        </Button>
-        :
-          <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
+          {props.user ? (
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={props.signInWithGoogle}
+              onClick={props.signOut}
             >
-              Sign in
+              Sign Out
             </Button>
-          </Link>
-          }
+          ) : (
+            <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={props.signInWithGoogle}
+              >
+                Sign in
+              </Button>
+            </Link>
+          )}
           <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
-            <GoogleButton disabled={props.user} className={classes.submit} type="light" onClick={props.signInWithGoogle}/>
+            <GoogleButton
+              disabled={props.user}
+              className={classes.submit}
+              type="light"
+              onClick={props.signInWithGoogle}
+            />
           </Link>
         </form>
       </Paper>

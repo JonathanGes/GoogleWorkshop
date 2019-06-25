@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { Link } from "@reach/router";
 import { Animate } from "react-simple-animate";
 import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
 const styles = {};
 
@@ -30,7 +31,7 @@ class MyEvents extends Component {
 
     return (
       <div className="my-events">
-        <Grid container spacing={16} justify="center">
+        <Grid container spacing={16}>
           {this.activeEvents.map(event => (
             <Grid item key={event.id}>
               <Link
@@ -53,7 +54,12 @@ class MyEvents extends Component {
           <Divider style={{ marginTop: "16px", marginBottom: "16px" }} />
         </Grid>
 
-        <Grid container spacing={16} justify="center">
+        <Grid item xs={12} style={{ marginBottom: "16px" }}>
+          <Typography variant="h5" color="primary">
+            Archive
+          </Typography>
+        </Grid>
+        <Grid container spacing={16}>
           {this.archivedEvents.map(event => (
             <Grid item key={event.id}>
               <Link

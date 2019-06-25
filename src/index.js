@@ -47,7 +47,8 @@ eventStore.addEvent({
   id: "3",
   title: "Party",
   description: "Yay",
-  image: "http://orientindia.com/admin//130/evt_photo/4_event_marketing.jpg"
+  image:
+    "https://weezevent.com/wp-content/uploads/2019/01/12145054/organiser-soiree.jpg"
 });
 eventStore.addEvent({
   id: "4",
@@ -96,10 +97,10 @@ const theme = createMuiTheme({
       default: "#fff"
     },
     primary: {
-      main: "#f6416c"
+      main: "#3778C2"
     },
     secondary: {
-      main: "#00b8a9",
+      main: "#63BCE5",
       contrastText: "#fff"
     },
     overrides: {
