@@ -31,8 +31,8 @@ const Task = types
 const PlaylistTrack = types
   .model("PlaylistTrack", {
     id: types.identifier,
-    title: types.string,
-    artist: types.optional(types.string, "Unknown")
+    title: types.optional(types.string, ""),
+    artist: types.optional(types.string, "")
   })
   .actions(self => ({
     setTitle(title) {

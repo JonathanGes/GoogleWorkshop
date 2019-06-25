@@ -11,19 +11,19 @@ import AppBar from "./components/AppBar";
 import { jsx } from "@emotion/core";
 import "./App.css";
 /* firebase */
-import withFirebaseAuth from 'react-with-firebase-auth'
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import withFirebaseAuth from "react-with-firebase-auth";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
-import firebaseConfig from './firebaseConfig';
+import firebaseConfig from "./firebaseConfig";
 
 const showAppBar = pathname => !["/", "/sign-in"].includes(pathname);
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
 const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
+  googleProvider: new firebase.auth.GoogleAuthProvider()
 };
 
 // const database = firebaseApp.database();
@@ -31,7 +31,6 @@ const providers = {
 @inject("eventStore")
 @observer
 class App extends Component {
-
   @computed
   get activeEventId() {
     const activeEvents = this.props.eventStore.events.filter(
@@ -41,29 +40,27 @@ class App extends Component {
   }
 
   render() {
-    const {
-      user,
-      signOut,
-      signInWithGoogle,
-    } = this.props;
+    const { user, signOut, signInWithGoogle } = this.props;
 
     return (
       <div className="App">
         <Location>
           {({ location }) => (
             <CssBaseline>
-              {(showAppBar(location.pathname) && user) && <AppBar user={user} signOut={signOut} />}
+              {showAppBar(location.pathname) && user && (
+                <AppBar user={user} signOut={signOut} />
+              )}
               <div
                 className="content"
-                css={{ padding: "48px 24px", width: "100%" }}
+                css={{ padding: "48px 24px", width: "60%" }}
               >
                 <Router primary={false}>
                   <SignIn
                     path="/sign-in"
                     default
                     activeEventId={this.activeEventId}
-                    user = {user}
-                    signInWithGoogle = {signInWithGoogle}
+                    user={user}
+                    signInWithGoogle={signInWithGoogle}
                     signOut={signOut}
                   />
                   {user && <MyEvents path="/my-events" />}
@@ -80,5 +77,5 @@ class App extends Component {
 
 export default withFirebaseAuth({
   providers,
-  firebaseAppAuth,
+  firebaseAppAuth
 })(withTheme()(App));

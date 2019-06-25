@@ -112,28 +112,6 @@ class Event extends Component {
 
     // eventStore.selectedEvent.addTask({ title: "Order sushi", id: "1" });
     console.log(eventStore.selectedEvent.tasks);
-    if (!eventStore.selectedEvent.playlist.length) {
-      eventStore.selectedEvent.addPlaylistTrack({
-        id: "1",
-        title: "SAD!",
-        artist: "XXXTENTACION"
-      });
-      eventStore.selectedEvent.addPlaylistTrack({
-        id: "2",
-        title: "Hunnybee",
-        artist: "Unknown Mortal Orchestra"
-      });
-      eventStore.selectedEvent.addPlaylistTrack({
-        id: "3",
-        title: "Still Beating",
-        artist: "Mac Demarco"
-      });
-      eventStore.selectedEvent.addPlaylistTrack({
-        id: "4",
-        title: "Your DOg",
-        artist: "Soccer Mommy"
-      });
-    }
   }
 
   @action
