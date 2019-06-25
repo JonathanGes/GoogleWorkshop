@@ -62,28 +62,44 @@ function SignIn(props) {
           {props.user ? `Welcome Back, ${props.user.displayName}` : "Sign in"}
         </Typography>
         <form className={classes.form}>
-          <FormControl disabled={props.user} margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl disabled={props.user} margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          {props.user ? (
+            <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Continue
+              </Button>
+            </Link>
+              ) : (
+            <div>
+              <FormControl disabled={props.user} margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">Email Address</InputLabel>
+                <Input id="email" name="email" autoComplete="email" autoFocus />
+              </FormControl>
+              <FormControl disabled={props.user} margin="normal" required fullWidth>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input
+                  name="password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+              </FormControl>
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+            </div>
+          )}
           {props.user ? (
             <Button
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
               onClick={props.signOut}
             >
@@ -103,6 +119,7 @@ function SignIn(props) {
               </Button>
             </Link>
           )}
+          {!props.user &&
           <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
             <GoogleButton
               disabled={props.user}
@@ -111,6 +128,7 @@ function SignIn(props) {
               onClick={props.signInWithGoogle}
             />
           </Link>
+          }
         </form>
       </Paper>
     </main>
