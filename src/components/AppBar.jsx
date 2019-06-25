@@ -74,12 +74,18 @@ class SimpleAppBar extends Component {
                   </Button>
                 </Link>
 
-                <Link to="/event/11" className={`${classes.button}`}>
+                <Link
+                  to="/event/11"
+                  className={`${classes.button}`}
+                  state={{ isNewEvent: true }}
+                >
                   <Button color="inherit">Create</Button>
                 </Link>
 
                 <Link to="/sign-in" className={classes.button}>
-                  <Button color="inherit" onClick = {this.props.signOut}>Logout</Button>
+                  <Button color="inherit" onClick={this.props.signOut}>
+                    Logout
+                  </Button>
                 </Link>
               </Toolbar>
             </AppBar>

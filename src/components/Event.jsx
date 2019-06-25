@@ -86,6 +86,7 @@ const styles = theme => ({
 @observer
 class Event extends Component {
   @observable assignments;
+  @observable isDetailsExpanded;
 
   constructor(props) {
     super(props);
@@ -110,9 +111,17 @@ class Event extends Component {
       eventStore.setSelectedEvent(eventId);
     }
 
+    if (props.location.state.isNewEvent) {
+      this.toggleIsDetailsExpanded();
+    }
     // eventStore.selectedEvent.addTask({ title: "Order sushi", id: "1" });
     console.log(eventStore.selectedEvent.tasks);
   }
+
+  @action
+  toggleIsDetailsExpanded = () => {
+    this.isDetailsExpanded = !this.isDetailsExpanded;
+  };
 
   @action
   handleChange = name => event => {
@@ -192,7 +201,11 @@ class Event extends Component {
 
           <div className={classes.eventDetails}>
             <Grid container spacing={24}>
-              <ExpansionPanel style={{ width: "100%" }}>
+              <ExpansionPanel
+                style={{ width: "100%" }}
+                expanded={this.isDetailsExpanded}
+                onChange={this.toggleIsDetailsExpanded}
+              >
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
