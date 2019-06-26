@@ -17,6 +17,7 @@ import DateAndTimePickers from "./DateAndTimePickers";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Tasks from "./Tasks";
 import Playlist from "./Playlist";
+import Budget from "./Budget";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -312,6 +313,17 @@ class Event extends Component {
                   </Typography>
                   <div className={classes.tasks}>
                     <Playlist playlist={eventStore.selectedEvent.playlist} />
+                  </div>
+                </div>
+              </Grid>
+
+              <Grid item xs={12}>
+                <div className={classes.propertyBox}>
+                  <Typography variant="h6" color="primary">
+                    Budget
+                  </Typography>
+                  <div className={classes.tasks}>
+                    <Budget />
                   </div>
                 </div>
               </Grid>
