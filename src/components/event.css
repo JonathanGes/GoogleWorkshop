@@ -1,0 +1,9 @@
+[class*="MTableToolbar-actions"] {
+	position: absolute;
+	left: 8px;
+	color: #63BCE5;
+}
+
+[class*="MTableToolbar-title"] {
+	display: none;
+}
