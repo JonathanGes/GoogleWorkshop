@@ -44,7 +44,11 @@ const styles = theme => ({
     marginTop: theme.spacing.unit
   },
   submit: {
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
+    width: "100% !important",
+    display: "flex !important",
+    justifyContent: "center !important",
+    alignItems: "center !important"
   }
 });
 
@@ -74,13 +78,23 @@ function SignIn(props) {
                 Continue
               </Button>
             </Link>
-              ) : (
+          ) : (
             <div>
-              <FormControl disabled={props.user} margin="normal" required fullWidth>
+              <FormControl
+                disabled={props.user}
+                margin="normal"
+                required
+                fullWidth
+              >
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input id="email" name="email" autoComplete="email" autoFocus />
               </FormControl>
-              <FormControl disabled={props.user} margin="normal" required fullWidth>
+              <FormControl
+                disabled={props.user}
+                margin="normal"
+                required
+                fullWidth
+              >
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   name="password"
@@ -106,7 +120,10 @@ function SignIn(props) {
               Sign Out
             </Button>
           ) : (
-            <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
+            <Link
+              to={activeEventId ? `/event/${activeEventId}` : "/my-events"}
+              style={{ textDecoration: "none" }}
+            >
               <Button
                 type="submit"
                 fullWidth
@@ -119,16 +136,19 @@ function SignIn(props) {
               </Button>
             </Link>
           )}
-          {!props.user &&
-          <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
-            <GoogleButton
-              disabled={props.user}
-              className={classes.submit}
-              type="light"
-              onClick={props.signInWithGoogle}
-            />
-          </Link>
-          }
+          {!props.user && (
+            <Link
+              to={activeEventId ? `/event/${activeEventId}` : "/my-events"}
+              style={{ textDecoration: "none" }}
+            >
+              <GoogleButton
+                disabled={props.user}
+                className={classes.submit}
+                type="light"
+                onClick={props.signInWithGoogle}
+              />
+            </Link>
+          )}
         </form>
       </Paper>
     </main>

@@ -68,7 +68,7 @@ class MyEvents extends Component {
                   state={{ isNewEvent: true }}
                 >
                   <Button variant="contained" color="primary">
-                    Create from Scratch
+                    Create a new event
                   </Button>
                 </Link>
               </Grid>

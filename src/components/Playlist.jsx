@@ -25,6 +25,7 @@ const styles = theme => ({
   },
   track: {
     transition: "background-color 200ms ease-in-out",
+    width: "100%",
     "&:hover": {
       backgroundColor: "rgba(0,0,0,0.05)",
       "& $deleteIcon": {
@@ -60,11 +61,14 @@ const SortableItem = sortableElement(
           1}`}</span>
         <div
           className="track-details"
-          style={{ display: "flex", flexDirection: "column" }}
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
           <TextField
             value={`${title}`}
-            InputProps={{ disableUnderline: true, autoFocus: title === "" }}
+            InputProps={{
+              disableUnderline: true,
+              autoFocus: title === ""
+            }}
             placeholder="Title"
             onChange={event => {
               setTitle(event.target.value);

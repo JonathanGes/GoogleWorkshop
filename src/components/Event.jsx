@@ -236,6 +236,7 @@ class Event extends Component {
                           </Typography>
                           <TextField
                             id="title"
+                            autoFocus
                             className={classes.textField}
                             value={eventStore.selectedEvent.title}
                             onChange={event =>
