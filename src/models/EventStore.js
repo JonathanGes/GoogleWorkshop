@@ -136,6 +136,63 @@ const EventStore = types
       self.selectedEvent = eventId;
       console.log(self.selectedEvent);
     }
+  }))
+  .views(self => ({
+    get newEventId() {
+      return Math.max(...self.events.map(event => parseInt(event.id))) + 1;
+    },
+    get templates() {
+      return {
+        birthday: {
+          tasks: [
+            {
+              id: "1",
+              title: "Find a location",
+              status: "todo"
+            }
+          ],
+          playlist: [
+            {
+              id: "1",
+              title: "Drop it like it's hot",
+              artist: "Snoop Dog"
+            }
+          ]
+        },
+        wedding: {
+          tasks: [
+            {
+              id: "1",
+              title: "Find a location",
+              status: "todo"
+            }
+          ],
+          playlist: [
+            {
+              id: "1",
+              title: "Drop it like it's hot",
+              artist: "Snoop Dog"
+            }
+          ]
+        },
+        babyShower: {
+          tasks: [
+            {
+              id: "1",
+              title: "Find a location",
+              status: "todo"
+            }
+          ],
+          playlist: [
+            {
+              id: "1",
+              title: "Drop it like it's hot",
+              artist: "Snoop Dog"
+            }
+          ]
+        }
+      };
+    }
   }));
 
 export default EventStore;

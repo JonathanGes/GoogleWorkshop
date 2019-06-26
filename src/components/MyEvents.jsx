@@ -8,6 +8,8 @@ import { Link } from "@reach/router";
 import { Animate } from "react-simple-animate";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import CreateScreen from "../components/CreateScreen";
+import { observable } from "rxjs";
 
 const styles = {};
 
@@ -30,54 +32,56 @@ class MyEvents extends Component {
     const { eventStore } = this.props;
 
     return (
-      <div className="my-events">
-        <Grid container spacing={16}>
-          {this.activeEvents.map(event => (
-            <Grid item key={event.id}>
-              <Link
-                to={`/event/${event.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <Animate
-                  play
-                  startStyle={{ opacity: 0 }}
-                  endStyle={{ opacity: 1 }}
+      <Fragment>
+        <div className="my-events">
+          <Grid container spacing={16}>
+            {this.activeEvents.map(event => (
+              <Grid item key={event.id}>
+                <Link
+                  to={`/event/${event.id}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  <EventCard event={event} />
-                </Animate>
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
+                  <Animate
+                    play
+                    startStyle={{ opacity: 0 }}
+                    endStyle={{ opacity: 1 }}
+                  >
+                    <EventCard event={event} />
+                  </Animate>
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
 
-        <Grid item xs={12}>
-          <Divider style={{ marginTop: "16px", marginBottom: "16px" }} />
-        </Grid>
+          <Grid item xs={12}>
+            <Divider style={{ marginTop: "16px", marginBottom: "16px" }} />
+          </Grid>
 
-        <Grid item xs={12} style={{ marginBottom: "16px" }}>
-          <Typography variant="h5" color="primary">
-            Archive
-          </Typography>
-        </Grid>
-        <Grid container spacing={16}>
-          {this.archivedEvents.map(event => (
-            <Grid item key={event.id}>
-              <Link
-                to={`/event/${event.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <Animate
-                  play
-                  startStyle={{ opacity: 0 }}
-                  endStyle={{ opacity: 1 }}
+          <Grid item xs={12} style={{ marginBottom: "16px" }}>
+            <Typography variant="h5" color="primary">
+              Archive
+            </Typography>
+          </Grid>
+          <Grid container spacing={16}>
+            {this.archivedEvents.map(event => (
+              <Grid item key={event.id}>
+                <Link
+                  to={`/event/${event.id}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  <EventCard event={event} />
-                </Animate>
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
+                  <Animate
+                    play
+                    startStyle={{ opacity: 0 }}
+                    endStyle={{ opacity: 1 }}
+                  >
+                    <EventCard event={event} />
+                  </Animate>
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      </Fragment>
     );
   }
 }

@@ -75,7 +75,7 @@ class SimpleAppBar extends Component {
                 </Link>
 
                 <Link
-                  to="/event/11"
+                  to="/event/create"
                   className={`${classes.button}`}
                   state={{ isNewEvent: true }}
                 >

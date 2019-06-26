@@ -8,6 +8,7 @@ import SignIn from "./components/SignIn";
 import MyEvents from "./components/MyEvents";
 import Event from "./components/Event";
 import AppBar from "./components/AppBar";
+import CreateScreen from "./components/CreateScreen";
 import { jsx } from "@emotion/core";
 import "./App.css";
 /* firebase */
@@ -68,6 +69,7 @@ class App extends Component {
                   />
                   {user && <MyEvents path="/my-events" />}
                   {user && <Event path="event/:eventId" />}
+                  {user && <CreateScreen path="event/create" />}
                 </Router>
               </div>
             </CssBaseline>

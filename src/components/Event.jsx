@@ -105,17 +105,27 @@ class Event extends Component {
         id: eventId,
         title: "Enter your title",
         description: "Enter your description",
+        isActive: true,
         image:
           "http://teenairsoftcommunity.com/wp-content/uploads/2016/09/Event-pic.jpg"
       });
       eventStore.setSelectedEvent(eventId);
     }
 
+    const eventType = props.location.state.eventType;
+    if (eventType) {
+      eventStore.templates[eventType].tasks.forEach(task =>
+        eventStore.selectedEvent.addTask(task)
+      );
+
+      eventStore.templates[eventType].playlist.forEach(track =>
+        eventStore.selectedEvent.addPlaylistTrack(track)
+      );
+    }
+
     if (props.location.state.isNewEvent) {
       this.toggleIsDetailsExpanded();
     }
-    // eventStore.selectedEvent.addTask({ title: "Order sushi", id: "1" });
-    console.log(eventStore.selectedEvent.tasks);
   }
 
   @action
