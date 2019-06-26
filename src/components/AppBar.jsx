@@ -35,7 +35,7 @@ class SimpleAppBar extends Component {
   getTitle(pathname, eventTitle) {
     return pathname.includes("/event/")
       ? eventTitle
-      : `Events of ${this.props.user.displayName}`;
+      : `${this.props.user.displayName}'s Events`;
   }
 
   render() {

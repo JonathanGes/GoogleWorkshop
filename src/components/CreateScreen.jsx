@@ -73,6 +73,7 @@ class CreateScreen extends Component {
 
   render() {
     const { classes } = this.props;
+    const cardHoverStyle = { "&:hover": { outline: "1px solid #3778C2" } };
     return (
       <div className={classes.createScreen}>
         <div className={classes.content}>
@@ -91,7 +92,7 @@ class CreateScreen extends Component {
                   className={`${classes.button}`}
                   state={{ isNewEvent: true, eventType: "birthday" }}
                 >
-                  <Card className={classes.card}>
+                  <Card className={classes.card} css={cardHoverStyle}>
                     <CardHeader
                       title="Birthday"
                       titleTypographyProps={{ align: "center" }}
@@ -109,7 +110,7 @@ class CreateScreen extends Component {
                   className={`${classes.button}`}
                   state={{ isNewEvent: true, eventType: "wedding" }}
                 >
-                  <Card className={classes.card}>
+                  <Card className={classes.card} css={cardHoverStyle}>
                     <CardHeader
                       title="Wedding"
                       titleTypographyProps={{ align: "center" }}
@@ -128,7 +129,7 @@ class CreateScreen extends Component {
                   className={`${classes.button}`}
                   state={{ isNewEvent: true, eventType: "babyShower" }}
                 >
-                  <Card className={classes.card}>
+                  <Card className={classes.card} css={cardHoverStyle}>
                     <CardHeader
                       title="Baby Shower"
                       titleTypographyProps={{ align: "center" }}

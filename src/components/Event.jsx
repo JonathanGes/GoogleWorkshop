@@ -74,7 +74,7 @@ const styles = theme => ({
     marginLeft: "-16px"
   },
   eventDetails: {
-    // padding: "0 24px 0 30%"
+    // padding: "0 12px"
   },
   editableInput: {
     backgroundColor: theme.palette.primary,
@@ -212,94 +212,96 @@ class Event extends Component {
 
           <div className={classes.eventDetails}>
             <Grid container spacing={24}>
-              <ExpansionPanel
-                style={{ width: "100%" }}
-                expanded={this.isDetailsExpanded}
-                onChange={this.toggleIsDetailsExpanded}
-              >
-                <ExpansionPanelSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
+              <Grid item xs={12}>
+                <ExpansionPanel
+                  style={{ width: "100%" }}
+                  expanded={this.isDetailsExpanded}
+                  onChange={this.toggleIsDetailsExpanded}
                 >
-                  <Typography variant="h5">
-                    {this.expansionPanelTitle}
-                  </Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Grid container>
-                    <Grid item xs={3}>
-                      <div className={classes.propertyBox}>
-                        <Typography variant="h6" color="primary">
-                          Title
-                        </Typography>
-                        <TextField
-                          id="title"
-                          className={classes.textField}
-                          value={eventStore.selectedEvent.title}
-                          onChange={event =>
-                            eventStore.selectedEvent.setTitle(
-                              event.target.value
-                            )
-                          }
-                          placeholder="Who..."
-                        />
-                      </div>
-                    </Grid>
+                  <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography variant="h5">
+                      {this.expansionPanelTitle}
+                    </Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <Grid container>
+                      <Grid item xs={3}>
+                        <div className={classes.propertyBox}>
+                          <Typography variant="h6" color="primary">
+                            Title
+                          </Typography>
+                          <TextField
+                            id="title"
+                            className={classes.textField}
+                            value={eventStore.selectedEvent.title}
+                            onChange={event =>
+                              eventStore.selectedEvent.setTitle(
+                                event.target.value
+                              )
+                            }
+                            placeholder="Who..."
+                          />
+                        </div>
+                      </Grid>
 
-                    <Grid item xs={9}>
-                      <div className={classes.propertyBox}>
-                        <Typography variant="h6" color="primary">
-                          Description
-                        </Typography>
-                        <TextField
-                          id="description"
-                          className={classes.textField}
-                          value={eventStore.selectedEvent.description}
-                          onChange={event =>
-                            eventStore.selectedEvent.setDescription(
-                              event.target.value
-                            )
-                          }
-                          placeholder="What..."
-                          fullWidth
-                        />
-                      </div>
-                    </Grid>
+                      <Grid item xs={9}>
+                        <div className={classes.propertyBox}>
+                          <Typography variant="h6" color="primary">
+                            Description
+                          </Typography>
+                          <TextField
+                            id="description"
+                            className={classes.textField}
+                            value={eventStore.selectedEvent.description}
+                            onChange={event =>
+                              eventStore.selectedEvent.setDescription(
+                                event.target.value
+                              )
+                            }
+                            placeholder="What..."
+                            fullWidth
+                          />
+                        </div>
+                      </Grid>
 
-                    <Grid item xs={3}>
-                      <div className={classes.propertyBox}>
-                        <Typography variant="h6" color="primary">
-                          Location
-                        </Typography>
-                        <TextField
-                          id="location"
-                          className={classes.textField}
-                          value={eventStore.selectedEvent.location}
-                          onChange={event =>
-                            eventStore.selectedEvent.setLocation(
-                              event.target.value
-                            )
-                          }
-                          placeholder="Where..."
-                        />
-                      </div>
-                    </Grid>
+                      <Grid item xs={3}>
+                        <div className={classes.propertyBox}>
+                          <Typography variant="h6" color="primary">
+                            Location
+                          </Typography>
+                          <TextField
+                            id="location"
+                            className={classes.textField}
+                            value={eventStore.selectedEvent.location}
+                            onChange={event =>
+                              eventStore.selectedEvent.setLocation(
+                                event.target.value
+                              )
+                            }
+                            placeholder="Where..."
+                          />
+                        </div>
+                      </Grid>
 
-                    <Grid item xs={9}>
-                      <div className={classes.propertyBox}>
-                        <Typography variant="h6" color="primary">
-                          Date and Time
-                        </Typography>
-                        <DateAndTimePickers
-                          value={eventStore.selectedEvent.dateAndTime}
-                          onChange={eventStore.selectedEvent.setDateAndTime}
-                        />
-                      </div>
+                      <Grid item xs={9}>
+                        <div className={classes.propertyBox}>
+                          <Typography variant="h6" color="primary">
+                            Date and Time
+                          </Typography>
+                          <DateAndTimePickers
+                            value={eventStore.selectedEvent.dateAndTime}
+                            onChange={eventStore.selectedEvent.setDateAndTime}
+                          />
+                        </div>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              </Grid>
 
               <Grid item xs={12}>
                 <div className={classes.propertyBox}>
