@@ -139,7 +139,9 @@ const EventStore = types
   }))
   .views(self => ({
     get newEventId() {
-      return Math.max(...self.events.map(event => parseInt(event.id))) + 1;
+      return self.events.length
+        ? Math.max(...self.events.map(event => parseInt(event.id))) + 1
+        : 1;
     },
     get templates() {
       return {
@@ -147,15 +149,85 @@ const EventStore = types
           tasks: [
             {
               id: "1",
-              title: "Find a location",
+              title: "Choose party theme",
+              status: "todo"
+            },
+            {
+              id: "2",
+              title: "Reserve venue",
+              status: "todo"
+            },
+            {
+              id: "3",
+              title: "Order cake",
+              status: "todo"
+            },
+            {
+              id: "4",
+              title: "Purchase party supplies",
+              status: "todo"
+            },
+            {
+              id: "5",
+              title: "Purchase food",
+              status: "todo"
+            },
+            {
+              id: "6",
+              title: "Book DJ",
               status: "todo"
             }
           ],
           playlist: [
             {
               id: "1",
+              title: "Happy",
+              artist: "Pharrell Williams"
+            },
+            {
+              id: "2",
+              title: "Crazy",
+              artist: "Gnarls Barkley"
+            },
+            {
+              id: "3",
+              title: "The Lovecats",
+              artist: "The Cure"
+            },
+            {
+              id: "4",
+              title: "Jungle Boogie",
+              artist: "Kool & The Gang"
+            },
+            {
+              id: "5",
               title: "Drop it like it's hot",
               artist: "Snoop Dog"
+            },
+            {
+              id: "6",
+              title: "Inspector Norse",
+              artist: "Todd Terje"
+            },
+            {
+              id: "7",
+              title: "Get Busy",
+              artist: "Sean Paul"
+            },
+            {
+              id: "8",
+              title: "Sweet Child o' Mine’",
+              artist: "Guns N' Roses"
+            },
+            {
+              id: "9",
+              title: "Need U (100%)’",
+              artist: "Duke Dumont featuring AME"
+            },
+            {
+              id: "10",
+              title: "Rehab",
+              artist: "Amy Winehouse"
             }
           ]
         },
@@ -163,15 +235,90 @@ const EventStore = types
           tasks: [
             {
               id: "1",
-              title: "Find a location",
+              title: "Hire wedding planner",
+              status: "todo"
+            },
+            {
+              id: "2",
+              title: "Reserve date and venue",
+              status: "todo"
+            },
+            {
+              id: "3",
+              title: "Book officiant",
+              status: "todo"
+            },
+            {
+              id: "4",
+              title: "Hire photographers",
+              status: "todo"
+            },
+            {
+              id: "5",
+              title: "Purchase dress",
+              status: "todo"
+            },
+            {
+              id: "6",
+              title: "Book DJ",
+              status: "todo"
+            },
+            {
+              id: "7",
+              title: "Book florist",
               status: "todo"
             }
           ],
           playlist: [
             {
               id: "1",
-              title: "Drop it like it's hot",
-              artist: "Snoop Dog"
+              title: "I Loved her First",
+              artist: "Heartland"
+            },
+            {
+              id: "2",
+              title: "I Hope you Dance",
+              artist: "Lee Ann Womack"
+            },
+            {
+              id: "3",
+              title: "Celebration",
+              artist: "Kool & The Gang"
+            },
+            {
+              id: "4",
+              title: "Always And Forever",
+              artist: "Heatwave"
+            },
+            {
+              id: "5",
+              title: "When You Kiss Me",
+              artist: "Shania Twain"
+            },
+            {
+              id: "6",
+              title: "Inspector Norse",
+              artist: "Todd Terje"
+            },
+            {
+              id: "7",
+              title: "Love Shack",
+              artist: "B-52’s"
+            },
+            {
+              id: "8",
+              title: "Endless Love",
+              artist: "Lionel Ritchie & Diana Ross"
+            },
+            {
+              id: "9",
+              title: "The Way You Look Tonight ",
+              artist: "Frank Sinatra"
+            },
+            {
+              id: "10",
+              title: "All of Me",
+              artist: "John Legend"
             }
           ]
         },
@@ -179,15 +326,86 @@ const EventStore = types
           tasks: [
             {
               id: "1",
-              title: "Find a location",
+              title: "Purchase cupcakes",
+              status: "todo"
+            },
+            {
+              id: "2",
+              title: "Plan out baby shower games",
+              status: "todo"
+            },
+            {
+              id: "3",
+              title:
+                "Designate someone to pick up the mother-to-be on the day of the shower",
+              status: "todo"
+            },
+            {
+              id: "4",
+              title: "Clean up around the house",
+              status: "todo"
+            },
+            {
+              id: "5",
+              title: "Decorate the house",
+              status: "todo"
+            },
+            {
+              id: "6",
+              title: "Reserve party rental supplies",
               status: "todo"
             }
           ],
           playlist: [
             {
               id: "1",
-              title: "Drop it like it's hot",
-              artist: "Snoop Dog"
+              title: "We’re Going to Be Friends",
+              artist: "The White Stripes"
+            },
+            {
+              id: "2",
+              title: "Race You",
+              artist: "Elizabeth & The Catapult"
+            },
+            {
+              id: "3",
+              title: "Beautiful Day",
+              artist: "U2"
+            },
+            {
+              id: "4",
+              title: "Count on Me",
+              artist: "Bruno Mars"
+            },
+            {
+              id: "5",
+              title: "Sweet Pea",
+              artist: "Amos Lee"
+            },
+            {
+              id: "6",
+              title: "The Littlest Birds",
+              artist: "The Be Good Tanyas"
+            },
+            {
+              id: "7",
+              title: "Ob-La-Di, Ob-La-Da",
+              artist: "The Beatles"
+            },
+            {
+              id: "8",
+              title: "Haven’t Met You Yet",
+              artist: "Michael Buble"
+            },
+            {
+              id: "9",
+              title: "All Smiles",
+              artist: "Jess Penner"
+            },
+            {
+              id: "10",
+              title: "Upside Down",
+              artist: "Jack Johnson"
             }
           ]
         }
