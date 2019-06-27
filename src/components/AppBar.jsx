@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import { Link, Location } from "@reach/router";
 import { inject, observer } from "mobx-react";
 import { computed, reaction, observable } from "mobx";
+import Evento from "../Evento.png";
 
 const styles = theme => ({
   root: {
@@ -62,6 +63,7 @@ class SimpleAppBar extends Component {
                     selectedEvent && selectedEvent.title
                   )}
                 </Typography>
+                {/* <img src={Evento} className={`${classes.toCenter}`} alt="???"/> */}
                 <Link
                   to="/my-events"
                   className={`${classes.toRight} ${classes.button}`}
