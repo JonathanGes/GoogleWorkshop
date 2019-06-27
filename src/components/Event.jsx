@@ -306,9 +306,9 @@ class Event extends Component {
 
               <Grid item xs={12}>
                 <div className={classes.propertyBox}>
-                  <Typography variant="h6" color="primary">
+                  {/* <Typography variant="h6" color="primary">
                     Tasks
-                  </Typography>
+                  </Typography> */}
                   <div className={classes.tasks}>
                     <Tasks
                       tasks={eventStore.selectedEvent.tasks}
