@@ -170,7 +170,7 @@ class Event extends Component {
                 </Button>
               </Tooltip>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <Tooltip title="Save your changes. This won't make your event visible to everyone.">
                 <Button
                   variant="contained"
@@ -180,7 +180,7 @@ class Event extends Component {
                   Save
                 </Button>
               </Tooltip>
-            </Grid>
+            </Grid> */}
             <Grid item>
               <FormDialog />
             </Grid>
