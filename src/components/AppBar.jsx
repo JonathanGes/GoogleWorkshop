@@ -70,7 +70,6 @@ class SimpleAppBar extends Component {
                 >
                   <Button
                     color="inherit"
-                    disabled={location.pathname.includes("my-events")}
                   >
                     My Events
                   </Button>

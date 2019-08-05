@@ -97,10 +97,10 @@ const theme = createMuiTheme({
       default: "rgb(249, 249, 249)"
     },
     primary: {
-      main: "#3778C2"
+      main: "#021E65"
     },
     secondary: {
-      main: "#63BCE5",
+      main: "#ADD2FE",
       contrastText: "#fff"
     },
     overrides: {
