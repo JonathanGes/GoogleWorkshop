@@ -39,7 +39,7 @@ The web app will open in your default browser.
  A co-organizer or participant profile was planned but not yet implemented.
 Additionally, some functionality is still missing and so some of the buttons are only stubs
 
-After signing in with your Google account, you can start creating your new event page. 
+After signing in with your Google account (see known issues), you can start creating your new event page. 
 
 You can either choose one of pre-defined event types, or start from scratch.
 The layout is common for both cases. 
@@ -53,3 +53,7 @@ The playlist is meant to be connected to Spotify but it is currently a stub.
 When your event is ready to go public, you can click 'publish' (stub)
 You will also be able to assign tasks to others using the 'invite' button (stub).
 After the event took place you can archive it and remove it from editing by using the 'archive' button.
+
+## Additional known issues
+* Sign in using username and password is not yet supported. Currently only 'sign in with google' is.
+* Deleting an event is not supported
