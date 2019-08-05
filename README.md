@@ -28,7 +28,7 @@ The web app will open in your default browser.
 ### Implementation
 
 - **Framework** - React for its ease of use, vast community and reusable components methodology.
-- **State Management** - We use MobX State Tree to manage state. The opinionated methodology makes it easy for us to work together and makes the code readable. Snapshots help us implement autosave easily!
+- **State Management** - We use MobX State Tree to manage state. The opinionated methodology makes it easy for us to work together and makes the code readable. Snapshots help us implement autosave!
 - **Routing** - Reach router is one of the easiest solutions we could find.
 - **UI** - We chose to go with Material UI for its simplicity and many available examples.
 - **Deployment** - We use Netlify to continously deploy our project to production.
