@@ -66,9 +66,6 @@ const styles = theme => ({
 class CreateScreen extends Component {
   constructor(props) {
     super(props);
-    console.log(
-      Math.max(...this.props.eventStore.events.map(event => parseInt(event.id)))
-    );
   }
 
   render() {

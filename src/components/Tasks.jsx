@@ -106,7 +106,6 @@ class Tasks extends Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
-                    console.log(newData);
                     addTask({ id: this.taskId, ...newData });
                   }
                   resolve();

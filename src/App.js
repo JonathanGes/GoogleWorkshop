@@ -29,19 +29,23 @@ const providers = {
 
 var database = firebaseApp.database();
 
-window.writeData = (user_json_data) => {
-  firebaseApp.database().ref('users/' + window.uid).set(user_json_data);
-}
+window.writeData = user_json_data => {
+  firebaseApp
+    .database()
+    .ref("users/" + window.uid)
+    .set(user_json_data);
+};
 
-window.getData = (data_handler)=>{
-  firebaseApp.database().ref('users/' + window.uid).on('value', function(snapshot) {
+window.getData = data_handler => {
+  firebaseApp
+    .database()
+    .ref("users/" + window.uid)
+    .on("value", function(snapshot) {
       // console.log(`user id: ${window.uid}`);
       data_handler(snapshot.val());
       // console.log(snapshot.val());
-      
-    }
-  );
-}
+    });
+};
 
 @inject("eventStore")
 @observer
@@ -52,8 +56,10 @@ class App extends Component {
     reaction(
       () => this.props.user,
       () => {
-        window.uid = this.props.user.uid;
-        this.props.eventStore.load();
+        if (this.props.user) {
+          window.uid = this.props.user.uid;
+          this.props.eventStore.load();
+        }
       }
     );
   }
@@ -67,7 +73,7 @@ class App extends Component {
   }
   render() {
     const { user, signOut, signInWithGoogle } = this.props;
-    
+
     return (
       <div className="App" style={{ backgroundColor: "rgb(249, 249, 249)" }}>
         <Location>

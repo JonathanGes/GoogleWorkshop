@@ -124,10 +124,6 @@ const Root = (
   </MuiThemeProvider>
 );
 
-// Patch listener will be invoked whenever the model or any of its descendants is mutated
-onPatch(eventStore, patch => {
-  console.log("PATCH", patch);
-});
 makeInspectable(eventStore);
 
 ReactDOM.render(Root, document.getElementById("root"));

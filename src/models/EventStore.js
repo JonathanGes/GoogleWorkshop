@@ -1,4 +1,10 @@
-import { types, destroy, onSnapshot, getSnapshot, applySnapshot } from "mobx-state-tree";
+import {
+  types,
+  destroy,
+  onSnapshot,
+  getSnapshot,
+  applySnapshot
+} from "mobx-state-tree";
 import arrayMove from "array-move";
 
 const Task = types
@@ -100,7 +106,6 @@ const Event = types
       self.time = time;
     },
     setDateAndTime(dateAndTime) {
-      console.log(dateAndTime);
       const [date, time] = dateAndTime.split("T");
       self.date = date;
       self.time = time;
@@ -134,47 +139,39 @@ const EventStore = types
     },
     setSelectedEvent(eventId) {
       self.selectedEvent = eventId;
-      console.log(self.selectedEvent);
     },
-    save(){
-      try{
-        if (window.uid !== undefined){
-          window.writeData(JSON.stringify(getSnapshot(self)))
+    save() {
+      try {
+        if (window.uid !== undefined) {
+          window.writeData(JSON.stringify(getSnapshot(self)));
           // console.log("Saving:", JSON.stringify(getSnapshot(self)));
-        }
-        else{
+        } else {
           console.log("Can't save, not logged in");
-          
         }
-      }
-      catch{
+      } catch {
         console.log("Saving Failed");
       }
     },
-    load(){      
-      try{
-        if (window.uid !== undefined){
-          window.getData((data)=>{
-            if(data !== undefined && data !== null){
+    load() {
+      try {
+        if (window.uid !== undefined) {
+          window.getData(data => {
+            if (data !== undefined && data !== null) {
               applySnapshot(self, JSON.parse(data));
-            }
-            else{
-              console.log("DB for this user is empty");            
+            } else {
+              console.log("DB for this user is empty");
             }
           });
-        }
-        else{
+        } else {
           console.log("Can't load, not logged in");
         }
-      }
-      catch{
+      } catch {
         console.log("Loading Failed");
       }
     },
-    afterCreate(){
-      onSnapshot(self, self.save)
+    afterCreate() {
+      onSnapshot(self, self.save);
     }
-
   }))
   .views(self => ({
     get newEventId() {
