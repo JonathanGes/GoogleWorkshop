@@ -89,6 +89,22 @@ class SimpleAppBar extends Component {
                     Logout
                   </Button>
                 </Link>
+
+                <Button
+                    color="inherit"
+                    onClick={()=>{
+                      console.log("Test:", this.props.user);
+                      let t = this.props.database.ref('home/1/').once(
+                      
+                        'testing'
+                      );
+                      console.log(t);
+                      
+                    }}
+                    
+                  >
+                    Test Fire Base
+                </Button>
               </Toolbar>
             </AppBar>
           )}

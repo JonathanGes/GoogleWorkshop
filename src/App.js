@@ -12,23 +12,28 @@ import CreateScreen from "./components/CreateScreen";
 import { jsx } from "@emotion/core";
 import "./App.css";
 /* firebase */
-import withFirebaseAuth from "react-with-firebase-auth";
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
+import { FirebaseContext } from './Firebase';
+// import withFirebaseAuth from "react-with-firebase-auth";
+// import * as firebase from "firebase/app";
+// import "firebase/auth";
+// import "firebase/database";
 
-import firebaseConfig from "./firebaseConfig";
+// import firebaseConfig from "./firebaseConfig";
 
 const showAppBar = pathname => !["/", "/sign-in"].includes(pathname);
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const firebaseAppAuth = firebaseApp.auth();
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider()
-};
+// const firebaseApp = firebase.initializeApp(firebaseConfig);
+// const firebaseAppAuth = firebaseApp.auth();
+// const providers = {
+//   googleProvider: new firebase.auth.GoogleAuthProvider()
+// };
 
 // const database = firebaseApp.database();
-// database.ref('home/').push({message: "hello world"});
+// database.ref('home/1').once(                   
+//   'value'
+// ).then((t)=>console.log(t));
+
+
 @inject("eventStore")
 @observer
 class App extends Component {
@@ -63,9 +68,9 @@ class App extends Component {
                     path="/sign-in"
                     default
                     activeEventId={this.activeEventId}
-                    user={user}
-                    signInWithGoogle={signInWithGoogle}
-                    signOut={signOut}
+                    // user={user}
+                    // signInWithGoogle={signInWithGoogle}
+                    // signOut={signOut}
                   />
                   {user && <MyEvents path="/my-events" />}
                   {user && <Event path="event/:eventId" />}
@@ -80,7 +85,9 @@ class App extends Component {
   }
 }
 
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth
-})(withTheme()(App));
+// export default withFirebaseAuth({
+//   providers,
+//   firebaseAppAuth
+// })(withTheme()(App));
+
+export default withTheme()(App);

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import Firebase, { FirebaseContext } from './Firebase';
 import * as serviceWorker from "./serviceWorker";
 
 import { onPatch } from "mobx-state-tree";
@@ -115,13 +116,15 @@ const theme = createMuiTheme({
 
 // Provider allows to pass the store to component
 const Root = (
-  <MuiThemeProvider theme={theme}>
-    <JssProvider jss={jss} generateClassName={generateClassName}>
-      <Provider eventStore={eventStore}>
-        <App />
-      </Provider>
-    </JssProvider>
-  </MuiThemeProvider>
+  <FirebaseContext.Provider value={new Firebase()}>
+    <MuiThemeProvider theme={theme}>
+      <JssProvider jss={jss} generateClassName={generateClassName}>
+        <Provider eventStore={eventStore}>
+          <App />
+        </Provider>
+      </JssProvider>
+    </MuiThemeProvider>
+  </FirebaseContext.Provider>
 );
 
 // Patch listener will be invoked whenever the model or any of its descendants is mutated

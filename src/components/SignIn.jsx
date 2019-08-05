@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "@reach/router";
 import GoogleButton from "react-google-button";
+import { withFirebase } from '../Firebase'
 
 const styles = theme => ({
   main: {
@@ -52,111 +53,144 @@ const styles = theme => ({
   }
 });
 
-function SignIn(props) {
-  const { classes, activeEventId } = props;
+class SignIn extends Component {
 
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {props.user ? `Welcome Back, ${props.user.displayName}` : "Sign in"}
-        </Typography>
-        <form className={classes.form}>
-          {props.user ? (
-            <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Continue
-              </Button>
-            </Link>
-          ) : (
-            <div>
-              <FormControl
-                disabled={props.user}
-                margin="normal"
-                required
-                fullWidth
-              >
-                <InputLabel htmlFor="email">Email Address</InputLabel>
-                <Input id="email" name="email" autoComplete="email" autoFocus />
-              </FormControl>
-              <FormControl
-                disabled={props.user}
-                margin="normal"
-                required
-                fullWidth
-              >
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
+  onSubmit = event => {
+    const { username, email, passwordOne } = this.state;
+
+    this.props.firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+        // this.setState({ ...INITIAL_STATE });
+      })
+      .catch(error => {
+        // this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  onSignIn = event => {
+    const { username, email, passwordOne } = this.state;
+
+    this.props.firebase
+      .doSignInWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+        // this.setState({ ...INITIAL_STATE });
+      })
+      .catch(error => {
+        // this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+
+  render(){
+    const { classes, activeEventId } = this.props;
+    return (
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            {this.props.user ? `Welcome Back, ${this.props.user.displayName}` : "Sign in"}
+          </Typography>
+          <form className={classes.form}>
+            {this.props.user ? (
+              <Link to={activeEventId ? `/event/${activeEventId}` : "/my-events"}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Continue
+                </Button>
+              </Link>
+            ) : (
+              <div>
+                <FormControl
+                  disabled={this.props.user}
+                  margin="normal"
+                  required
+                  fullWidth
+                >
+                  <InputLabel htmlFor="email">Email Address</InputLabel>
+                  <Input id="email" name="email" autoComplete="email" autoFocus />
+                </FormControl>
+                <FormControl
+                  disabled={this.props.user}
+                  margin="normal"
+                  required
+                  fullWidth
+                >
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <Input
+                    name="password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                  />
+                </FormControl>
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
                 />
-              </FormControl>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-            </div>
-          )}
-          {props.user ? (
-            <Button
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-              onClick={props.signOut}
-            >
-              Sign Out
-            </Button>
-          ) : (
-            <Link
-              to={activeEventId ? `/event/${activeEventId}` : "/my-events"}
-              style={{ textDecoration: "none" }}
-            >
+              </div>
+            )}
+            {this.props.user ? (
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 className={classes.submit}
-                onClick={props.signInWithGoogle}
+                onClick={this.props.signOut}
               >
-                Sign in
+                Sign Out
               </Button>
-            </Link>
-          )}
-          {!props.user && (
-            <Link
-              to={activeEventId ? `/event/${activeEventId}` : "/my-events"}
-              style={{ textDecoration: "none" }}
-            >
-              <GoogleButton
-                disabled={props.user}
-                className={classes.submit}
-                type="light"
-                onClick={props.signInWithGoogle}
-              />
-            </Link>
-          )}
-        </form>
-      </Paper>
-    </main>
-  );
+            ) : (
+              <Link
+                to={activeEventId ? `/event/${activeEventId}` : "/my-events"}
+                style={{ textDecoration: "none" }}
+              >
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={this.props.signInWithGoogle}
+                >
+                  Sign in
+                </Button>
+              </Link>
+            )}
+            {!this.props.user && (
+              <Link
+                to={activeEventId ? `/event/${activeEventId}` : "/my-events"}
+                style={{ textDecoration: "none" }}
+              >
+                <GoogleButton
+                  disabled={this.props.user}
+                  className={classes.submit}
+                  type="light"
+                  onClick={this.props.firebase.doSignInWithGoogle}
+                />
+              </Link>
+            )}
+          </form>
+        </Paper>
+      </main>
+    );
+  }
 }
 
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SignIn);
+export default withFirebase(withStyles(styles)(SignIn));
