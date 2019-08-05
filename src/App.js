@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { inject, observer } from "mobx-react";
-import { computed } from "mobx";
+import { computed, reaction } from "mobx";
 import { Link, Router, Location } from "@reach/router";
 import { withTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -27,11 +27,37 @@ const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider()
 };
 
-// const database = firebaseApp.database();
-// database.ref('home/').push({message: "hello world"});
+var database = firebaseApp.database();
+
+window.writeData = (user_json_data) => {
+  firebaseApp.database().ref('users/' + window.uid).set(user_json_data);
+}
+
+window.getData = (data_handler)=>{
+  firebaseApp.database().ref('users/' + window.uid).on('value', function(snapshot) {
+      // console.log(`user id: ${window.uid}`);
+      data_handler(snapshot.val());
+      // console.log(snapshot.val());
+      
+    }
+  );
+}
+
 @inject("eventStore")
 @observer
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    reaction(
+      () => this.props.user,
+      () => {
+        window.uid = this.props.user.uid;
+        this.props.eventStore.load();
+      }
+    );
+  }
+
   @computed
   get activeEventId() {
     const activeEvents = this.props.eventStore.events.filter(
@@ -39,10 +65,9 @@ class App extends Component {
     );
     return (activeEvents.length && activeEvents[0].id) || "";
   }
-
   render() {
     const { user, signOut, signInWithGoogle } = this.props;
-
+    
     return (
       <div className="App" style={{ backgroundColor: "rgb(249, 249, 249)" }}>
         <Location>

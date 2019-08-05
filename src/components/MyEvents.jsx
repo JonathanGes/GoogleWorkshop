@@ -57,7 +57,7 @@ class MyEvents extends Component {
                 >
                   <img
                     style={{ width: "35%", height: "35%" }}
-                    src={Screensaver}
+                    src={Screensaver} alt=""
                   />
                 </div>
               </Grid>

@@ -1,4 +1,4 @@
-import { types, destroy } from "mobx-state-tree";
+import { types, destroy, onSnapshot, getSnapshot, applySnapshot } from "mobx-state-tree";
 import arrayMove from "array-move";
 
 const Task = types
@@ -135,7 +135,46 @@ const EventStore = types
     setSelectedEvent(eventId) {
       self.selectedEvent = eventId;
       console.log(self.selectedEvent);
+    },
+    save(){
+      try{
+        if (window.uid !== undefined){
+          window.writeData(JSON.stringify(getSnapshot(self)))
+          // console.log("Saving:", JSON.stringify(getSnapshot(self)));
+        }
+        else{
+          console.log("Can't save, not logged in");
+          
+        }
+      }
+      catch{
+        console.log("Saving Failed");
+      }
+    },
+    load(){      
+      try{
+        if (window.uid !== undefined){
+          window.getData((data)=>{
+            if(data !== undefined && data !== null){
+              applySnapshot(self, JSON.parse(data));
+            }
+            else{
+              console.log("DB for this user is empty");            
+            }
+          });
+        }
+        else{
+          console.log("Can't load, not logged in");
+        }
+      }
+      catch{
+        console.log("Loading Failed");
+      }
+    },
+    afterCreate(){
+      onSnapshot(self, self.save)
     }
+
   }))
   .views(self => ({
     get newEventId() {
