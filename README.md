@@ -44,7 +44,7 @@ After signing in with your Google account (see known issues), you can start crea
 You can either choose one of pre-defined event types, or start from scratch.
 The layout is common for both cases.
 
-_Any change you make is automatically saved!_
+*Any change you make is automatically saved!* . 
 You should start by setting your event description and date.
 You'll also see a list of tasks. This list will be pre-populated in case you chose an existing template, or empty in case you start from scratch.
 You can start creating tasks and update their progress.
